@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RSRL.Api.Db.Services;
+using RSRL.Api.Extensions;
 
 namespace RSRL.Api
 {
@@ -25,6 +27,8 @@ namespace RSRL.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddNHibernateSessionFactory(Configuration.GetConnectionString("Db"));
 
             services.AddSwaggerGen(cfg =>
             {
