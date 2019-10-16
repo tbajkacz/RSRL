@@ -3,6 +3,7 @@ using FluentNHibernate.Cfg.Db;
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Tool.hbm2ddl;
 using RSRL.Api.Db.Conventions;
+using RSRL.Api.Db.Services;
 using System.Data;
 
 namespace RSRL.Api.Extensions
@@ -17,7 +18,8 @@ namespace RSRL.Api.Extensions
                 .ExposeConfiguration(x =>
                     new SchemaUpdate(x).Execute(false, true))
                 .BuildSessionFactory();
-            return services.AddScoped<NHibernate.ISession>(p => fact.OpenSession());
+            return services.AddScoped<NHibernate.ISession>(p => fact.OpenSession())
+                .AddScoped<IUnitOfWork, NHibernateUnitOfWork>();
         }
     }
 }
