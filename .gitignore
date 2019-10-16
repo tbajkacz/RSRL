@@ -372,3 +372,4 @@ src/srv/RSRL/RSRL.Api/appsettings.json
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.db
