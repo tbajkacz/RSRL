@@ -7,7 +7,7 @@ namespace RSRL.Api.Db.Models
         public virtual TId Id { get; set; }
     }
 
-    public class EntityMap<TId> : ClassMap<Entity<TId>>
+    public class EntityMap<TEntity, TId> : ClassMap<TEntity> where TEntity : Entity<TId>
     {
         public EntityMap()
         {
