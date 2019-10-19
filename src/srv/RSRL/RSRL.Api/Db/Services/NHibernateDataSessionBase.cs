@@ -9,11 +9,16 @@ namespace RSRL.Api.Db.Services
 {
     public class NHibernateDataSessionBase<TEntity, TId> : IDataSession<TEntity, TId> where TEntity : Entity<TId>
     {
-        private readonly ISession session;
+        protected readonly ISession session;
 
         public NHibernateDataSessionBase(ISession session)
         {
             this.session = session;
+        }
+
+        public async Task AddAsync(TEntity entity)
+        {
+            await session.SaveAsync(entity);
         }
 
         public async Task DeleteAsync(TId id)

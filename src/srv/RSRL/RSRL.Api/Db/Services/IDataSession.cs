@@ -12,6 +12,8 @@ namespace RSRL.Api.Db.Services
 
         Task<TEntity> GetByIdOrDefaultAsync(TId id);
 
+        Task AddAsync(TEntity entity);
+
         Task UpdateAsync(TEntity entity);
 
         Task DeleteAsync(TId id);
