@@ -1,3 +1,4 @@
+using AutoMapper;
 using AutoWrapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,7 +8,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RSRL.Api.Auth.Services;
 using RSRL.Api.Extensions;
+using RSRL.Api.Mapper;
 using RSRL.Api.Options;
+using System.Reflection;
 
 namespace RSRL.Api
 {
@@ -33,6 +36,8 @@ namespace RSRL.Api
 
             services.AddCookieAuthentication();
             services.AddAuthorizationWithPolicies();
+
+            services.AddAutoMapper(cfg => cfg.AddProfile<DefaultAutoMapperProfile>(), Assembly.GetAssembly(typeof(Startup)));
 
             services.AddSwaggerGen(cfg =>
             {
