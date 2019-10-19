@@ -1,18 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoWrapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using RSRL.Api.Db.Services;
+using RSRL.Api.Auth.Services;
 using RSRL.Api.Extensions;
+using RSRL.Api.Options;
 
 namespace RSRL.Api
 {
@@ -26,9 +21,18 @@ namespace RSRL.Api
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<HashOptions>(Configuration.GetSection("Hash"));
+
             services.AddControllers();
 
             services.AddNHibernateSessionFactory(Configuration.GetConnectionString("Db"));
+
+            services.AddSingleton<IHashService, HashService>();
+
+            services.AddEntitySessions();
+
+            services.AddCookieAuthentication();
+            services.AddAuthorizationWithPolicies();
 
             services.AddSwaggerGen(cfg =>
             {
@@ -58,6 +62,7 @@ namespace RSRL.Api
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
