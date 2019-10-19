@@ -1,0 +1,19 @@
+﻿{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "Db": "sqlite.db"
+  },
+  "Hash": {
+    "SaltSize": 64,
+    "Iterations": 1000,
+    "KeySize" :  128,
+    "HashAlgorithmName":  "SHA512"
+  }
+}
