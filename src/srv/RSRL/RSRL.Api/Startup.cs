@@ -60,6 +60,8 @@ namespace RSRL.Api
 
             app.UseSwagger();
 
+            app.UseApiResponseAndExceptionWrapper(new AutoWrapperOptions { IsDebug = true, ShowStatusCode = true });
+
             app.UseRouting();
 
             app.UseAuthentication();
