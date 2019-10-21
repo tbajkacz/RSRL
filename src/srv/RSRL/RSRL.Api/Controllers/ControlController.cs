@@ -17,11 +17,13 @@ namespace RSRL.Api.Controllers
             this.remoteLock = remoteLock;
         }
 
+        [HttpPost]
         public async Task ToggleBlock(ToggleBlockParams param)
         {
             await remoteLock.ToggleBlockAsync(param.TargetState);
         }
 
+        [HttpPost]
         public async Task Unlock()
         {
             await remoteLock.UnlockAsync();
