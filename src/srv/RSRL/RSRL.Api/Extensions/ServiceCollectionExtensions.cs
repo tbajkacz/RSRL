@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Tool.hbm2ddl;
+using RSRL.Api.AccessCards.Services;
 using RSRL.Api.Auth.Constants;
 using RSRL.Api.Db.Conventions;
 using RSRL.Api.Db.Services;
@@ -33,7 +34,8 @@ namespace RSRL.Api.Extensions
         }
 
         public static IServiceCollection AddNHibernateRepositories(this IServiceCollection services)
-            => services.AddTransient<IUserRepository, NHibernateUserRepository>();
+            => services.AddTransient<IUserRepository, NHibernateUserRepository>()
+                       .AddTransient<IAccessCardRepository, NHibernateAccessCardRepository>();
 
         public static AuthenticationBuilder AddCookieAuthentication(this IServiceCollection services)
             => services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
