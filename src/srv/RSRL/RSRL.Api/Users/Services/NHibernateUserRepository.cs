@@ -8,7 +8,7 @@ using RSRL.Api.Users.Models;
 
 namespace RSRL.Api.Users.Services
 {
-    public class NHibernateUserRepository : NHibernateDataSessionBase<UserAccount, int>, IUserRepository
+    public class NHibernateUserRepository : NHibernateRepositoryBase<UserAccount, int>, IUserRepository
     {
         private readonly IHashService hashService;
 

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace RSRL.Api.Db.Services
 {
-    public class NHibernateDataSessionBase<TEntity, TId> : IDataSession<TEntity, TId> where TEntity : Entity<TId>
+    public class NHibernateRepositoryBase<TEntity, TId> : IRepository<TEntity, TId> where TEntity : Entity<TId>
     {
         protected readonly ISession session;
 
-        public NHibernateDataSessionBase(ISession session)
+        public NHibernateRepositoryBase(ISession session)
         {
             this.session = session;
         }

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace RSRL.Api.Db.Services
 {
-    public interface IDataSession<TEntity, TId> where TEntity : Entity<TId>
+    public interface IRepository<TEntity, TId> where TEntity : Entity<TId>
     {
         IEnumerable<TEntity> Get();
 
