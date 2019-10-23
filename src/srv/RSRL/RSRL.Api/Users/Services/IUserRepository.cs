@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace RSRL.Api.Users.Services
 {
-    public interface IUserSession : IDataSession<UserAccount, int>
+    public interface IUserRepository : IDataSession<UserAccount, int>
     {
         Task<UserAccount> ValidateCredentialsAsync(AuthParams param);
     }

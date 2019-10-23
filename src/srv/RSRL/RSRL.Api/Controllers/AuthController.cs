@@ -17,10 +17,10 @@ namespace RSRL.Api.Controllers
     [DefaultRoute]
     public class AuthController : ControllerBase
     {
-        private readonly IUserSession userSession;
+        private readonly IUserRepository userSession;
         private readonly IMapper mapper;
 
-        public AuthController(IUserSession userSession, IMapper mapper)
+        public AuthController(IUserRepository userSession, IMapper mapper)
         {
             this.userSession = userSession;
             this.mapper = mapper;

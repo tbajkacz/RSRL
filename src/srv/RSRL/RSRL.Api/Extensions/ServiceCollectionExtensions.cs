@@ -32,8 +32,8 @@ namespace RSRL.Api.Extensions
                 .AddScoped<IUnitOfWork, NHibernateUnitOfWork>();
         }
 
-        public static IServiceCollection AddEntitySessions(this IServiceCollection services)
-            => services.AddTransient<IUserSession, NHibernateUserSession>();
+        public static IServiceCollection AddNHibernateRepositories(this IServiceCollection services)
+            => services.AddTransient<IUserRepository, NHibernateUserRepository>();
 
         public static AuthenticationBuilder AddCookieAuthentication(this IServiceCollection services)
             => services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -43,7 +43,7 @@ namespace RSRL.Api.Extensions
                     {
                         OnValidatePrincipal = async context =>
                         {
-                            var userSession = context.HttpContext.RequestServices.GetRequiredService<IUserSession>();
+                            var userSession = context.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
                             try
                             {
                                 var userId = context.Principal.GetId();

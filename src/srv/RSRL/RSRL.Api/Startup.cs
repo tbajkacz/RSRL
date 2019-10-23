@@ -32,7 +32,7 @@ namespace RSRL.Api
 
             services.AddSingleton<IHashService, HashService>();
 
-            services.AddEntitySessions();
+            services.AddNHibernateRepositories();
 
             services.AddCookieAuthentication();
             services.AddAuthorizationWithPolicies();

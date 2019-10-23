@@ -8,11 +8,11 @@ using RSRL.Api.Users.Models;
 
 namespace RSRL.Api.Users.Services
 {
-    public class NHibernateUserSession : NHibernateDataSessionBase<UserAccount, int>, IUserSession
+    public class NHibernateUserRepository : NHibernateDataSessionBase<UserAccount, int>, IUserRepository
     {
         private readonly IHashService hashService;
 
-        public NHibernateUserSession(ISession session, IHashService hashService)
+        public NHibernateUserRepository(ISession session, IHashService hashService)
             : base(session)
         {
             this.hashService = hashService;

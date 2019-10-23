@@ -19,11 +19,11 @@ namespace RSRL.Api.Controllers
     [Authorize(Policy = Policies.Admin)]
     public class UserController : ControllerBase
     {
-        private readonly IUserSession userSession;
+        private readonly IUserRepository userSession;
         private readonly IUnitOfWork uow;
         private readonly IMapper mapper;
 
-        public UserController(IUserSession userSession, IUnitOfWork uow, IMapper mapper)
+        public UserController(IUserRepository userSession, IUnitOfWork uow, IMapper mapper)
         {
             this.userSession = userSession;
             this.uow = uow;

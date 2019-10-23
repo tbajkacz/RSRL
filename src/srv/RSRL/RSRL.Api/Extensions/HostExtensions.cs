@@ -15,7 +15,7 @@ namespace RSRL.Api.Extensions
         public static IHost AddRootUser(this IHost host)
         {
             using var scope = host.Services.CreateScope();
-            var userSession = scope.ServiceProvider.GetRequiredService<IUserSession>();
+            var userSession = scope.ServiceProvider.GetRequiredService<IUserRepository>();
             var uow = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
             var hashService = scope.ServiceProvider.GetRequiredService<IHashService>();
             if (userSession.Get().Count() == 0)
