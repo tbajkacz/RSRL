@@ -8,7 +8,7 @@ namespace RSRL.Api.Db.Conventions
     {
         public void Apply(IIdentityInstance instance)
         {
-            if (instance.Type.Name.Contains("string", StringComparison.InvariantCultureIgnoreCase))
+            if (!instance.Type.Name.Contains("string", StringComparison.InvariantCultureIgnoreCase))
             {
                 instance.GeneratedBy.Increment();
             }
