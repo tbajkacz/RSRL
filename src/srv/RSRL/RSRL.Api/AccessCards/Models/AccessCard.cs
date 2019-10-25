@@ -5,7 +5,7 @@ namespace RSRL.Api.AccessCards.Models
 {
     public class AccessCard : Entity<string>
     {
-        public UserAccount Owner { get; set; }
+        public virtual UserAccount Owner { get; set; }
     }
 
     public class AccessCardMap : EntityMap<AccessCard, string>
