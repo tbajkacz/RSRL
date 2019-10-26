@@ -6,12 +6,12 @@ namespace RSRL.Api.Extensions
     public static class ClaimsPrincipalExtensions
     {
         public static int GetId(this ClaimsPrincipal claimsPrincipal)
-            => int.Parse(claimsPrincipal.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            => int.Parse(claimsPrincipal.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value);
 
         public static bool TryGetId(this ClaimsPrincipal claimsPrincipal, out int id)
-            => int.TryParse(claimsPrincipal.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value, out id);
+            => int.TryParse(claimsPrincipal.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value, out id);
 
         public static string GetLogin(this ClaimsPrincipal claimsPrincipal)
-            => claimsPrincipal.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Name).Value;
+            => claimsPrincipal.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
     }
 }

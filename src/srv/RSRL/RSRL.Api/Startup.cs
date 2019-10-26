@@ -2,12 +2,14 @@ using AutoMapper;
 using AutoWrapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RSRL.Api.Auth.Services;
 using RSRL.Api.Extensions;
+using RSRL.Api.Locks.Services;
 using RSRL.Api.Mapper;
 using RSRL.Api.Options;
 using System.Reflection;
@@ -16,12 +18,16 @@ namespace RSRL.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment env;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            this.env = env;
         }
 
         public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<HashOptions>(Configuration.GetSection("Hash"));
@@ -32,9 +38,11 @@ namespace RSRL.Api
 
             services.AddSingleton<IHashService, HashService>();
 
+            services.AddTransient<ILockHttpService, LockHttpService>();
+
             services.AddNHibernateRepositories();
 
-            services.AddCookieAuthentication();
+            services.AddCookieAuthentication(env.IsDevelopment() ? CookieSecurePolicy.None : CookieSecurePolicy.Always);
             services.AddAuthorizationWithPolicies();
 
             services.AddAutoMapper(cfg => cfg.AddProfile<DefaultAutoMapperProfile>(), Assembly.GetAssembly(typeof(Startup)));
@@ -65,7 +73,11 @@ namespace RSRL.Api
 
             app.UseSwagger();
 
-            app.UseApiResponseAndExceptionWrapper(new AutoWrapperOptions { IsDebug = true, ShowStatusCode = true });
+            app.UseApiResponseAndExceptionWrapper(new AutoWrapperOptions
+            {
+                IsDebug = env.IsDevelopment(),
+                ShowStatusCode = true
+            });
 
             app.UseRouting();
 
