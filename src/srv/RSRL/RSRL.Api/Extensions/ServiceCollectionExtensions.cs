@@ -9,6 +9,7 @@ using RSRL.Api.Auth.Constants;
 using RSRL.Api.Db.Conventions;
 using RSRL.Api.Db.Services;
 using RSRL.Api.Exceptions;
+using RSRL.Api.Locks.Services;
 using RSRL.Api.Users.Services;
 using System;
 using System.Data;
@@ -35,7 +36,8 @@ namespace RSRL.Api.Extensions
 
         public static IServiceCollection AddNHibernateRepositories(this IServiceCollection services)
             => services.AddTransient<IUserRepository, NHibernateUserRepository>()
-                       .AddTransient<IAccessCardRepository, NHibernateAccessCardRepository>();
+                       .AddTransient<IAccessCardRepository, NHibernateAccessCardRepository>()
+                       .AddTransient<IRemoteLockRepository, NHibernateRemoteLockRepository>();
 
         public static AuthenticationBuilder AddCookieAuthentication(this IServiceCollection services)
             => services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
