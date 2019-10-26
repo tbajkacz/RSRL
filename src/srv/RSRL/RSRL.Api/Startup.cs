@@ -69,7 +69,11 @@ namespace RSRL.Api
 
             app.UseSwagger();
 
-            app.UseApiResponseAndExceptionWrapper(new AutoWrapperOptions { IsDebug = true, ShowStatusCode = true });
+            app.UseApiResponseAndExceptionWrapper(new AutoWrapperOptions
+            {
+                IsDebug = env.IsDevelopment(),
+                ShowStatusCode = true
+            });
 
             app.UseRouting();
 
