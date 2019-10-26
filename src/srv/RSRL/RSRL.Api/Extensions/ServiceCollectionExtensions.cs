@@ -2,6 +2,7 @@
 using FluentNHibernate.Cfg.Db;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Tool.hbm2ddl;
 using RSRL.Api.AccessCards.Services;
@@ -39,10 +40,12 @@ namespace RSRL.Api.Extensions
                        .AddTransient<IAccessCardRepository, NHibernateAccessCardRepository>()
                        .AddTransient<IRemoteLockRepository, NHibernateRemoteLockRepository>();
 
-        public static AuthenticationBuilder AddCookieAuthentication(this IServiceCollection services)
+        public static AuthenticationBuilder AddCookieAuthentication(this IServiceCollection services, CookieSecurePolicy cookieSecurePolicy)
             => services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(cfg =>
                 {
+                    cfg.Cookie.SecurePolicy = cookieSecurePolicy;
+
                     cfg.Events = new CookieAuthenticationEvents
                     {
                         OnValidatePrincipal = async context =>

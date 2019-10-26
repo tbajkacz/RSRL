@@ -2,6 +2,7 @@ using AutoMapper;
 using AutoWrapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -17,9 +18,12 @@ namespace RSRL.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment env;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            this.env = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -38,7 +42,7 @@ namespace RSRL.Api
 
             services.AddNHibernateRepositories();
 
-            services.AddCookieAuthentication();
+            services.AddCookieAuthentication(env.IsDevelopment() ? CookieSecurePolicy.None : CookieSecurePolicy.Always);
             services.AddAuthorizationWithPolicies();
 
             services.AddAutoMapper(cfg => cfg.AddProfile<DefaultAutoMapperProfile>(), Assembly.GetAssembly(typeof(Startup)));
