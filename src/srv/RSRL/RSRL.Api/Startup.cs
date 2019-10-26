@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RSRL.Api.Auth.Services;
 using RSRL.Api.Extensions;
+using RSRL.Api.Locks.Services;
 using RSRL.Api.Mapper;
 using RSRL.Api.Options;
 using System.Reflection;
@@ -22,6 +23,7 @@ namespace RSRL.Api
         }
 
         public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<HashOptions>(Configuration.GetSection("Hash"));
@@ -31,6 +33,8 @@ namespace RSRL.Api
             services.AddNHibernateSessionFactory(Configuration.GetConnectionString("Db"));
 
             services.AddSingleton<IHashService, HashService>();
+
+            services.AddTransient<ILockHttpService, LockHttpService>();
 
             services.AddNHibernateRepositories();
 
