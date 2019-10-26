@@ -46,10 +46,14 @@ namespace RSRL.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<UserAccountDto> GetCurrentUser()
         {
-            return mapper.Map<UserAccount, UserAccountDto>(await userSession.GetByIdAsync(HttpContext.User.GetId()));
+            if (!HttpContext.User.TryGetId(out int id) ||
+                !(await userSession.GetByIdOrDefaultAsync(id) is UserAccount user))
+            {
+                return null;
+            }
+            return mapper.Map<UserAccount, UserAccountDto>(user);
         }
     }
 }
