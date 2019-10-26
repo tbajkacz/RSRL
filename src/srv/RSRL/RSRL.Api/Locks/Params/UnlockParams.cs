@@ -1,9 +1,7 @@
 ﻿namespace RSRL.Api.Locks.Params
 {
-    public class ToggleBlockParams
+    public class UnlockParams
     {
         public int LockId { get; set; }
-
-        public bool TargetState { get; set; }
     }
 }
