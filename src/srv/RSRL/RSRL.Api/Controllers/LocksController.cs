@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using RSRL.Api.Db.Services;
 using RSRL.Api.Locks.Dto;
 using RSRL.Api.Locks.Models;
 using RSRL.Api.Locks.Params;
@@ -18,12 +19,15 @@ namespace RSRL.Api.Controllers
         private readonly ILockHttpService lockHttpService;
         private readonly IRemoteLockRepository lockRepository;
         private readonly IMapper mapper;
+        private readonly IUnitOfWork uow;
 
-        public LocksController(ILockHttpService lockHttpService, IRemoteLockRepository lockRepository, IMapper mapper)
+        public LocksController(ILockHttpService lockHttpService, IRemoteLockRepository lockRepository,
+                               IMapper mapper, IUnitOfWork uow)
         {
             this.lockHttpService = lockHttpService;
             this.lockRepository = lockRepository;
             this.mapper = mapper;
+            this.uow = uow;
         }
 
         [HttpGet]
@@ -38,6 +42,7 @@ namespace RSRL.Api.Controllers
         {
             var remoteLock = mapper.Map<RemoteLockAddParams, RemoteLock>(param);
             await lockRepository.AddAsync(remoteLock);
+            await uow.CommitAsync();
         }
 
         [HttpPost]
