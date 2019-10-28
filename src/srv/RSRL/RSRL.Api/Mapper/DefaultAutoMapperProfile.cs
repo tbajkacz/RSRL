@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using RSRL.Api.AccessCards.Models;
+using RSRL.Api.AccessCards.Params;
 using RSRL.Api.Locks.Dto;
 using RSRL.Api.Locks.Models;
 using RSRL.Api.Locks.Params;
@@ -19,6 +21,8 @@ namespace RSRL.Api.Mapper
 
             CreateMap<RemoteLockAddParams, RemoteLock>();
             CreateMap<RemoteLock, RemoteLockDto>();
+
+            CreateMap<AccessCardAddParams, AccessCard>();
         }
     }
 }
