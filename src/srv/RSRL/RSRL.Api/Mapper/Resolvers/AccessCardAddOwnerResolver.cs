@@ -17,7 +17,7 @@ namespace RSRL.Api.Mapper.Resolvers
 
         public UserAccount Resolve(AccessCardAddParams source, AccessCard destination, UserAccount destMember, ResolutionContext context)
         {
-            return userRepository.GetByIdAsync(source.OwnerId);
+            return userRepository.GetByIdOrDefault(source.OwnerId);
         }
     }
 }

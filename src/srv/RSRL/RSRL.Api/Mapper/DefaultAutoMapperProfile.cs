@@ -22,7 +22,8 @@ namespace RSRL.Api.Mapper
             CreateMap<RemoteLockAddParams, RemoteLock>();
             CreateMap<RemoteLock, RemoteLockDto>();
 
-            CreateMap<AccessCardAddParams, AccessCard>();
+            CreateMap<AccessCardAddParams, AccessCard>()
+                .ForMember(c => c.Owner, mce => mce.MapFrom<AccessCardAddOwnerResolver>());
         }
     }
 }
