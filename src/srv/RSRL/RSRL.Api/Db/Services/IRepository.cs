@@ -8,6 +8,8 @@ namespace RSRL.Api.Db.Services
     {
         IEnumerable<TEntity> Get();
 
+        TEntity GetByIdOrDefault(TId id);
+
         Task<TEntity> GetByIdAsync(TId id);
 
         Task<TEntity> GetByIdOrDefaultAsync(TId id);
