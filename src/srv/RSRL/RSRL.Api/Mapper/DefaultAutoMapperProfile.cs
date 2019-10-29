@@ -1,4 +1,9 @@
 ﻿using AutoMapper;
+using RSRL.Api.AccessCards.Dto;
+using RSRL.Api.AccessCards.Models;
+using RSRL.Api.AccessCards.Params;
+using RSRL.Api.Audit.Dto;
+using RSRL.Api.Audit.Models;
 using RSRL.Api.Locks.Dto;
 using RSRL.Api.Locks.Models;
 using RSRL.Api.Locks.Params;
@@ -19,6 +24,12 @@ namespace RSRL.Api.Mapper
 
             CreateMap<RemoteLockAddParams, RemoteLock>();
             CreateMap<RemoteLock, RemoteLockDto>();
+
+            CreateMap<AccessCardAddParams, AccessCard>()
+                .ForMember(c => c.Owner, mce => mce.MapFrom<AccessCardAddOwnerResolver>());
+            CreateMap<AccessCard, AccessCardDto>();
+
+            CreateMap<ActionLog, ActionLogDto>();
         }
     }
 }

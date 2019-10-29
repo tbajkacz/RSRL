@@ -36,6 +36,11 @@ namespace RSRL.Api.Db.Services
             return await session.GetAsync<TEntity>(id) ?? throw new EntityNotFoundException(typeof(TEntity), id);
         }
 
+        public TEntity GetByIdOrDefault(TId id)
+        {
+            return session.Get<TEntity>(id);
+        }
+
         public async Task<TEntity> GetByIdOrDefaultAsync(TId id)
         {
             return await session.GetAsync<TEntity>(id);
