@@ -70,7 +70,7 @@ namespace RSRL.Api.Controllers
             await actionLogger.AddActionLogAsync(
                 $"Lock id: {param.LockId} was {(param.TargetState ? "blocked" : "unblocked")}",
                 ActionType.LockRemoteToggleBlock,
-                DateTime.Now
+                DateTime.Now,
                 HttpContext.User.GetId());
             await uow.CommitAsync();
         }
