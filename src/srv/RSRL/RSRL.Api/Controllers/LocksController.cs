@@ -54,9 +54,10 @@ namespace RSRL.Api.Controllers
         [HttpPost]
         public async Task Unlock(UnlockParams param)
         {
+            var remoteLock = await lockRepository.GetByIdAsync(param.LockId);
             await lockHttpService.UnlockAsync(param.LockId);
             await actionLogger.AddActionLogAsync(
-                $"Lock id: {param.LockId} was unlocked",
+                $"Lock \"{remoteLock.Name}\" was unlocked",
                 ActionType.LockRemoteUnlock,
                 DateTime.Now,
                 HttpContext.User.GetId());
@@ -66,9 +67,10 @@ namespace RSRL.Api.Controllers
         [HttpPost]
         public async Task ToggleBlock(ToggleBlockParams param)
         {
+            var remoteLock = await lockRepository.GetByIdAsync(param.LockId);
             await lockHttpService.ToggleBlockAsync(param.LockId, param.TargetState);
             await actionLogger.AddActionLogAsync(
-                $"Lock id: {param.LockId} was {(param.TargetState ? "blocked" : "unblocked")}",
+                $"Lock \"{remoteLock.Name}\" was {(param.TargetState ? "blocked" : "unblocked")}",
                 ActionType.LockRemoteToggleBlock,
                 DateTime.Now,
                 HttpContext.User.GetId());
