@@ -76,5 +76,14 @@ namespace RSRL.Api.Controllers
                 HttpContext.User.GetId());
             await uow.CommitAsync();
         }
+
+        [HttpGet]
+        public async Task<VerifyAccessCardAllowedDto> VerifyAccessCardAllowed([FromQuery]VerifyAccessCardAllowedParams param)
+        {
+            return new VerifyAccessCardAllowedDto
+            {
+                HasAccess = await lockRepository.VerifyAccessCardAllowedAsync(param.LockSecretKey, param.AccessCardId)
+            };
+        }
     }
 }

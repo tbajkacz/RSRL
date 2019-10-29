@@ -22,7 +22,8 @@ namespace RSRL.Api.Mapper
             CreateMap<UserAccountAddParams, UserAccount>()
                 .ForMember(u => u.PasswordHash, mce => mce.MapFrom<UserAccountAddPasswordHashResolver>());
 
-            CreateMap<RemoteLockAddParams, RemoteLock>();
+            CreateMap<RemoteLockAddParams, RemoteLock>()
+                .ForMember(l => l.AllowedAccessCards, mce => mce.MapFrom<RemoteLockAddAllowedAccessCardsResolver>());
             CreateMap<RemoteLock, RemoteLockDto>();
 
             CreateMap<AccessCardAddParams, AccessCard>()
