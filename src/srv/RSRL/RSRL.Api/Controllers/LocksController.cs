@@ -9,6 +9,7 @@ using RSRL.Api.Locks.Models;
 using RSRL.Api.Locks.Params;
 using RSRL.Api.Locks.Services;
 using RSRL.Api.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -57,6 +58,7 @@ namespace RSRL.Api.Controllers
             await actionLogger.AddActionLogAsync(
                 $"Lock id: {param.LockId} was unlocked",
                 ActionType.LockRemoteUnlock,
+                DateTime.Now
                 HttpContext.User.GetId());
             await uow.CommitAsync();
         }
@@ -68,6 +70,7 @@ namespace RSRL.Api.Controllers
             await actionLogger.AddActionLogAsync(
                 $"Lock id: {param.LockId} was {(param.TargetState ? "blocked" : "unblocked")}",
                 ActionType.LockRemoteToggleBlock,
+                DateTime.Now
                 HttpContext.User.GetId());
             await uow.CommitAsync();
         }

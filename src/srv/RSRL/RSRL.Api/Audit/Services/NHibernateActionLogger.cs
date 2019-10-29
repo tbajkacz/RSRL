@@ -28,19 +28,19 @@ namespace RSRL.Api.Audit.Services
             return session.Query<ActionLog>();
         }
 
-        public async Task AddActionLogAsync(string description, ActionType actionType, int userId = default)
+        public async Task AddActionLogAsync(string description, ActionType actionType, DateTime eventTime, int userId = default)
         {
-            await AddActionLogAsync(description, actionType.ToString(), userId);
+            await AddActionLogAsync(description, actionType.ToString(), eventTime, userId);
         }
 
-        public async Task AddActionLogAsync(string description, string actionType, int userId = default)
+        public async Task AddActionLogAsync(string description, string actionType, DateTime eventTime, int userId = default)
         {
             await SaveAsync(new ActionLog
             {
                 Description = description,
                 Executor = await userRepository.GetByIdOrDefaultAsync(userId),
                 Type = actionType,
-                ExecutionDate = DateTime.Now,
+                ExecutionDate = eventTime,
             });
         }
     }
