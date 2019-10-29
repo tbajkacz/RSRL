@@ -1,5 +1,7 @@
-﻿using RSRL.Api.Db.Models;
+﻿using RSRL.Api.AccessCards.Models;
+using RSRL.Api.Db.Models;
 using System;
+using System.Collections.Generic;
 
 namespace RSRL.Api.Locks.Models
 {
@@ -10,6 +12,8 @@ namespace RSRL.Api.Locks.Models
         public virtual string Url { get; set; }
 
         public virtual string SecretKey { get; set; } = Guid.NewGuid().ToString();
+
+        public virtual IList<AccessCard> AllowedAccessCards { get; set; } = new List<AccessCard>();
     }
 
     public class RemoteLockMap : EntityMap<RemoteLock, int>
@@ -25,6 +29,7 @@ namespace RSRL.Api.Locks.Models
             Map(x => x.SecretKey)
                 .Not.Nullable()
                 .Unique();
+            HasMany(x => x.AllowedAccessCards);
         }
     }
 }
