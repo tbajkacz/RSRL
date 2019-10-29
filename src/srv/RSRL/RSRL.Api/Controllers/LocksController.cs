@@ -58,7 +58,7 @@ namespace RSRL.Api.Controllers
             await actionLogger.AddActionLogAsync(
                 $"Lock id: {param.LockId} was unlocked",
                 ActionType.LockRemoteUnlock,
-                DateTime.Now
+                DateTime.Now,
                 HttpContext.User.GetId());
             await uow.CommitAsync();
         }
