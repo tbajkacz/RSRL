@@ -6,6 +6,6 @@ namespace RSRL.Api.Locks.Services
 {
     public interface IRemoteLockRepository : IRepository<RemoteLock, int>
     {
-        public Task<RemoteLock> GetBySecretKeyOrDefaultAsync(string key);
+        public Task<RemoteLock> GetBySecretKeyAsync(string key);
     }
 }

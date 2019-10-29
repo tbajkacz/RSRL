@@ -4,6 +4,7 @@
     {
         LockRemoteToggleBlock,
         LockRemoteUnlock,
-        LockRfidOpen,
+        LockAccessCardUnlock,
+        LockAccessCardDenied,
     }
 }

@@ -13,10 +13,10 @@ namespace RSRL.Api.Locks.Services
         {
         }
 
-        public async Task<RemoteLock> GetBySecretKeyOrDefaultAsync(string key)
+        public async Task<RemoteLock> GetBySecretKeyAsync(string key)
         {
             return await session.Query<RemoteLock>()
-                .SingleOrDefaultAsync(l => l.SecretKey == key);
+                .SingleAsync(l => l.SecretKey == key);
         }
     }
 }
