@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using NHibernate;
 using NHibernate.Linq;
 using RSRL.Api.Db.Services;
+using RSRL.Api.Exceptions;
 using RSRL.Api.Locks.Models;
 
 namespace RSRL.Api.Locks.Services
@@ -17,7 +18,7 @@ namespace RSRL.Api.Locks.Services
         public async Task<RemoteLock> GetBySecretKeyAsync(string key)
         {
             return await session.Query<RemoteLock>()
-                .SingleAsync(l => l.SecretKey == key);
+                .SingleOrDefaultAsync(l => l.SecretKey == key) ?? throw new RemoteLockNotFoundException(key);
         }
 
         public async Task<bool> VerifyAccessCardAllowedAsync(string lockSecret, string cardId)
