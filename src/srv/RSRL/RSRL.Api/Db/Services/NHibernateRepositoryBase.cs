@@ -33,7 +33,7 @@ namespace RSRL.Api.Db.Services
 
         public TEntity GetById(TId id)
         {
-            return session.Get<TEntity>(id);
+            return session.Get<TEntity>(id) ?? throw new EntityNotFoundException(typeof(TEntity), id);
         }
 
         public async Task<TEntity> GetByIdAsync(TId id)
