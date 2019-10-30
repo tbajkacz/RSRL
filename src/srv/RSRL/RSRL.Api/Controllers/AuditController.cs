@@ -69,5 +69,16 @@ namespace RSRL.Api.Controllers
                 param.EventDate);
             await uow.CommitAsync();
         }
+
+        [HttpPost]
+        public async Task ReportMovement(ReportMovementParams param)
+        {
+            var remoteLock = await lockRepository.GetBySecretKeyAsync(param.LockSecretKey);
+            await actionLogger.AddActionLogAsync(
+                $"Lock \"{remoteLock.Name}\" has detected movement",
+                ActionType.LockMovement,
+                param.EventDate);
+            await uow.CommitAsync();
+        }
     }
 }

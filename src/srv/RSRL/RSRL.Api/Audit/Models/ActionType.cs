@@ -6,5 +6,6 @@
         LockRemoteUnlock,
         LockAccessCardUnlock,
         LockAccessCardDenied,
+        LockMovement,
     }
 }
