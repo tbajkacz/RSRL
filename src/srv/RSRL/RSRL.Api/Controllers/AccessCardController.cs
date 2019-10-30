@@ -44,5 +44,13 @@ namespace RSRL.Api.Controllers
             await accessCardRepository.AddAsync(card);
             await uow.CommitAsync();
         }
+
+        [HttpPost]
+        public async Task Update(AccessCardUpdateParams param)
+        {
+            var card = mapper.Map<AccessCardUpdateParams, AccessCard>(param);
+            await accessCardRepository.UpdateAsync(card);
+            await uow.CommitAsync();
+        }
     }
 }

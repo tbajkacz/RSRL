@@ -21,13 +21,20 @@ namespace RSRL.Api.Mapper
             CreateMap<UserAccount, UserAccountDto>();
             CreateMap<UserAccountAddParams, UserAccount>()
                 .ForMember(u => u.PasswordHash, mce => mce.MapFrom<UserAccountAddPasswordHashResolver>());
+            CreateMap<UserAccountUpdateParams, UserAccount>()
+                .ForMember(u => u.PasswordHash, mce => mce.MapFrom<UserAccountUpdatePasswordHashResolver>());
 
             CreateMap<RemoteLockAddParams, RemoteLock>()
                 .ForMember(l => l.AllowedAccessCards, mce => mce.MapFrom<RemoteLockAddAllowedAccessCardsResolver>());
+            CreateMap<RemoteLockUpdateParams, RemoteLock>()
+                .ForMember(l => l.AllowedAccessCards, mce => mce.MapFrom<RemoteLockUpdateAllowedAccessCardsResolver>())
+                .ForMember(r => r.SecretKey, mce => mce.MapFrom<RemoteLockUpdateSecretKeyResolver>());
             CreateMap<RemoteLock, RemoteLockDto>();
 
             CreateMap<AccessCardAddParams, AccessCard>()
                 .ForMember(c => c.Owner, mce => mce.MapFrom<AccessCardAddOwnerResolver>());
+            CreateMap<AccessCardUpdateParams, AccessCard>()
+                .ForMember(c => c.Owner, mce => mce.MapFrom<AccessCardUpdateOwnerResolver>());
             CreateMap<AccessCard, AccessCardDto>();
 
             CreateMap<ActionLog, ActionLogDto>();

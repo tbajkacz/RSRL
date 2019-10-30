@@ -8,16 +8,16 @@ using System.Linq;
 
 namespace RSRL.Api.Mapper.Resolvers
 {
-    public class RemoteLockAddAllowedAccessCardsResolver : IValueResolver<RemoteLockAddParams, RemoteLock, IList<AccessCard>>
+    public class RemoteLockUpdateAllowedAccessCardsResolver : IValueResolver<RemoteLockUpdateParams, RemoteLock, IList<AccessCard>>
     {
         private readonly IAccessCardRepository cardRepository;
 
-        public RemoteLockAddAllowedAccessCardsResolver(IAccessCardRepository cardRepository)
+        public RemoteLockUpdateAllowedAccessCardsResolver(IAccessCardRepository cardRepository)
         {
             this.cardRepository = cardRepository;
         }
 
-        public IList<AccessCard> Resolve(RemoteLockAddParams source, RemoteLock destination, IList<AccessCard> destMember, ResolutionContext context)
+        public IList<AccessCard> Resolve(RemoteLockUpdateParams source, RemoteLock destination, IList<AccessCard> destMember, ResolutionContext context)
         {
             return source.AllowedAccessCardIds
                 .Select(id => cardRepository.GetById(id))

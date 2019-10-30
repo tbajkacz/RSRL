@@ -52,6 +52,14 @@ namespace RSRL.Api.Controllers
         }
 
         [HttpPost]
+        public async Task Update(RemoteLockUpdateParams param)
+        {
+            var remoteLock = mapper.Map<RemoteLockUpdateParams, RemoteLock>(param);
+            await lockRepository.UpdateAsync(remoteLock);
+            await uow.CommitAsync();
+        }
+
+        [HttpPost]
         public async Task Unlock(UnlockParams param)
         {
             var remoteLock = await lockRepository.GetByIdAsync(param.LockId);
