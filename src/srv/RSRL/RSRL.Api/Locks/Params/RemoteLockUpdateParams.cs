@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace RSRL.Api.Locks.Params
 {
-    public class RemoteLockAddParams
+    public class RemoteLockUpdateParams
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string Url { get; set; }

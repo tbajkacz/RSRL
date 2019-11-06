@@ -45,5 +45,14 @@ namespace RSRL.Api.Controllers
             await userSession.AddAsync(user);
             await uow.CommitAsync();
         }
+
+        [HttpPost]
+        public async Task Update(UserAccountUpdateParams param)
+        {
+            var user = mapper.Map<UserAccountUpdateParams, UserAccount>(param);
+
+            await userSession.UpdateAsync(user);
+            await uow.CommitAsync();
+        }
     }
 }

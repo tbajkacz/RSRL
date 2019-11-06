@@ -6,6 +6,7 @@ using RSRL.Api.AccessCards.Models;
 using RSRL.Api.AccessCards.Params;
 using RSRL.Api.AccessCards.Services;
 using RSRL.Api.Auth.Constants;
+using RSRL.Api.Db.Services;
 using RSRL.Api.Utility;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +21,13 @@ namespace RSRL.Api.Controllers
     {
         private readonly IAccessCardRepository accessCardRepository;
         private readonly IMapper mapper;
+        private readonly IUnitOfWork uow;
 
-        public AccessCardController(IAccessCardRepository accessCardRepository, IMapper mapper)
+        public AccessCardController(IAccessCardRepository accessCardRepository, IMapper mapper, IUnitOfWork uow)
         {
             this.accessCardRepository = accessCardRepository;
             this.mapper = mapper;
+            this.uow = uow;
         }
 
         [HttpGet]
@@ -39,6 +42,15 @@ namespace RSRL.Api.Controllers
         {
             var card = mapper.Map<AccessCardAddParams, AccessCard>(param);
             await accessCardRepository.AddAsync(card);
+            await uow.CommitAsync();
+        }
+
+        [HttpPost]
+        public async Task Update(AccessCardUpdateParams param)
+        {
+            var card = mapper.Map<AccessCardUpdateParams, AccessCard>(param);
+            await accessCardRepository.UpdateAsync(card);
+            await uow.CommitAsync();
         }
     }
 }

@@ -31,9 +31,19 @@ namespace RSRL.Api.Db.Services
             return session.Query<TEntity>();
         }
 
+        public TEntity GetById(TId id)
+        {
+            return session.Get<TEntity>(id) ?? throw new EntityNotFoundException(typeof(TEntity), id);
+        }
+
         public async Task<TEntity> GetByIdAsync(TId id)
         {
             return await session.GetAsync<TEntity>(id) ?? throw new EntityNotFoundException(typeof(TEntity), id);
+        }
+
+        public TEntity GetByIdOrDefault(TId id)
+        {
+            return session.Get<TEntity>(id);
         }
 
         public async Task<TEntity> GetByIdOrDefaultAsync(TId id)
