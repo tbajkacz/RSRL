@@ -1,6 +1,7 @@
-import { ApiResponse, CurrentUser, AuthParams } from "./../Common/types";
+import { ApiResponse } from "./../Common/types";
 import { unwrap } from "../Common/serviceUtility";
 import axios from "axios";
+import { AuthParams, CurrentUser } from "./authTypes";
 
 class AuthService {
   SignIn(params?: AuthParams) {

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { authService } from "./AuthService";
 import LoadingIndicator from "../LoadingIndicator";
-import { Auth, CurrentUser, AuthParams } from "../Common/types";
+import { Auth, CurrentUser, AuthParams } from "./authTypes";
 
 export const AuthContext = React.createContext<Auth>({
   signIn: () => null,
