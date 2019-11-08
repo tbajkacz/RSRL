@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 interface LoadingIndicatorProps {
   children?: JSX.Element;
-  promise?: Promise<any>;
+  promise: Promise<any> | undefined;
 }
 
 export default function LoadingIndicator(props: LoadingIndicatorProps) {
