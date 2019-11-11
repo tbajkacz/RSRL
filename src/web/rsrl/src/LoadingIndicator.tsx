@@ -13,10 +13,14 @@ export default function LoadingIndicator(props: LoadingIndicatorProps) {
   }, [props.promise]);
 
   if (props.promise) {
-    props.promise.then(() => {
-      console.log("done");
-      setIsCompleted(true);
-    });
+    props.promise.then(
+      () => {
+        setIsCompleted(true);
+      },
+      () => {
+        setIsCompleted(true);
+      }
+    );
     return <div>{isCompleted ? props.children : "Loading..."}</div>;
   }
   return <div>{props.children}</div>;
