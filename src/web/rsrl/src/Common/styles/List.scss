@@ -1,0 +1,73 @@
+@import "./Variables.scss";
+@import "./Common.scss";
+@import "../../../node_modules/bootstrap";
+
+$listHeight: 500px;
+
+.ui-list-header {
+  border-bottom-color: $uiElementBorderColor;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+}
+
+.ui-list-wrapper {
+  @extend .shadow-sm;
+  border-radius: 2px;
+}
+
+.ui-list-header {
+  @extend .text-white;
+  @extend .p-2;
+}
+
+.ui-side-list-wrapper {
+  @extend .ui-element-bg-dark;
+  @extend .shadow-sm;
+  @extend .pl-0;
+  @extend .pr-0;
+  @extend .pt-1;
+  border-radius: 2px;
+}
+
+.ui-list-dark {
+  @extend .list-group;
+  overflow: auto;
+  max-height: $listHeight;
+}
+
+.ui-list-item-dark {
+  @extend .list-group-item;
+  @extend .rounded-0;
+  @extend .shadow-sm;
+  @extend .text-white;
+  @extend .ui-element-bg-dark;
+  &:not(.ui-selected):hover {
+    background-color: $uiElementHoverBgColor;
+    cursor: pointer;
+  }
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom-color: $uiElementBorderColor;
+  margin-top: 3px;
+}
+
+.ui-side-list-item-dark {
+  @extend .list-group-item;
+  @extend .rounded-0;
+  @extend .shadow-none;
+  @extend .text-white;
+  @extend .py-1;
+  @extend .ui-element-bg-dark;
+  &:hover {
+    background-color: $uiElementHoverBgColor;
+    cursor: pointer;
+  }
+  &:active {
+    background-color: $uiElementActiveBgColor;
+  }
+  border: 0;
+  span {
+    @extend .mr-2;
+  }
+}
