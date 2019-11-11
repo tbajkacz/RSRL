@@ -1,11 +1,24 @@
-import React, { useState } from "react";
-import Input from "../Common/Input";
-import Button from "../Common/Button";
+import React, { useState, FormEvent } from "react";
 import { combineClasses } from "../Common/ComponentUtility";
 import { useAuth } from "./authContext";
 import { Redirect } from "react-router";
 import routes from "../Common/Routes";
-import { AuthParams } from "../Common/types";
+import "./styles/Login.scss";
+import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AuthParams } from "./authTypes";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Form,
+  InputGroup,
+  CardFooter,
+  FormGroup,
+  Label,
+  Input,
+  Button
+} from "reactstrap";
 
 interface LoginProps {
   className?: string;
@@ -15,7 +28,7 @@ export function Login(props: LoginProps) {
   const [params, setParams] = useState<AuthParams>();
   const auth = useAuth();
 
-  const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     auth.signIn(params);
   };
@@ -23,35 +36,60 @@ export function Login(props: LoginProps) {
   return auth.currentUser ? (
     <Redirect to={routes.Home} />
   ) : (
-    <form
-      className={combineClasses(
-        "col-sm-8 col-md-6 col-lg-4 mx-auto border rounded p-3",
-        props.className
-      )}
-    >
-      <h3 className="text-center">Sign in to RSRLC</h3>
-      <div className="form-group">
-        <Input
-          onChange={e =>
-            setParams({ ...params!, login: e.currentTarget.value })
-          }
-          placeholder="Login"
-        />
-      </div>
-      <div className="form-group">
-        <Input
-          onChange={e =>
-            setParams({ ...params!, password: e.currentTarget.value })
-          }
-          placeholder="Password"
-          type="password"
-        />
-      </div>
-      <div className="form-group">
-        <Button className="btn-block" type="primary" onClick={onSubmit}>
-          Login
-        </Button>
-      </div>
-    </form>
+    <div className={props.className}>
+      <Card className="col-md-3 ui-login-card shadow">
+        <CardHeader>
+          <h3 className="text-white">Sign In</h3>
+        </CardHeader>
+        <CardBody>
+          <Form onSubmit={onSubmit}>
+            <FormGroup>
+              <InputGroup className="input-group">
+                <span className="ui-input-icon">
+                  <FontAwesomeIcon icon={faUser} />
+                </span>
+                <Input
+                  type="text"
+                  placeholder="username"
+                  onChange={e =>
+                    setParams({ ...params!, login: e.currentTarget.value })
+                  }
+                />
+              </InputGroup>
+            </FormGroup>
+            <FormGroup>
+              <InputGroup>
+                <span className="ui-input-icon">
+                  <FontAwesomeIcon icon={faKey} />
+                </span>
+                <Input
+                  type="password"
+                  placeholder="password"
+                  onChange={e =>
+                    setParams({ ...params!, password: e.currentTarget.value })
+                  }
+                />
+              </InputGroup>
+            </FormGroup>
+            <FormGroup className="ui-login-remember-me">
+              <Input type="checkbox" />
+              <Label>Remember me</Label>
+            </FormGroup>
+            <FormGroup>
+              <Button color="primary" block={true}>
+                Login
+              </Button>
+            </FormGroup>
+          </Form>
+        </CardBody>
+        <CardFooter>
+          <small className="text-white">
+            Don't have an account?{" "}
+            <a href="mailto:tomasz.bajkacz@gmail.com">Contact</a> your
+            administrator
+          </small>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }

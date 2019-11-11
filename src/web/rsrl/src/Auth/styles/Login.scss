@@ -1,0 +1,26 @@
+@import "../../../node_modules/bootstrap";
+@import "../../Common/styles/Variables.scss";
+
+.ui-login-card {
+  @extend .rounded-0;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  background-color: $uiElementBasicBgColor !important;
+}
+
+.ui-input-icon {
+  @extend .input-group-text;
+  width: 40px;
+  background-color: $primaryColor;
+  color: black;
+  border: 0 !important;
+}
+
+.ui-login-remember-me {
+  color: white;
+  margin-left: 20px;
+}
+
+.links {
+  color: white;
+}
