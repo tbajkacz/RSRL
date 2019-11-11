@@ -17,13 +17,13 @@ namespace RSRL.Api.Controllers
     [ApiController]
     [DefaultRoute]
     [Authorize(Policy = Policies.Admin)]
-    public class AccessCardController : ControllerBase
+    public class AccessCardsController : ControllerBase
     {
         private readonly IAccessCardRepository accessCardRepository;
         private readonly IMapper mapper;
         private readonly IUnitOfWork uow;
 
-        public AccessCardController(IAccessCardRepository accessCardRepository, IMapper mapper, IUnitOfWork uow)
+        public AccessCardsController(IAccessCardRepository accessCardRepository, IMapper mapper, IUnitOfWork uow)
         {
             this.accessCardRepository = accessCardRepository;
             this.mapper = mapper;
