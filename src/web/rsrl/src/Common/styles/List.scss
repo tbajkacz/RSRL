@@ -4,15 +4,24 @@
 
 $listHeight: 500px;
 
-.ui-list-header {
-  border-bottom-color: $uiElementBorderColor;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
+.ui-list-flex-container {
+  @extend .d-flex;
+  @extend .justify-content-center;
 }
 
 .ui-list-wrapper {
   @extend .shadow-sm;
+  @extend .ui-element-bg-dark;
+  @extend .p-0;
   border-radius: 2px;
+}
+
+.ui-side-list-wrapper {
+  @extend .pl-0;
+  @extend .pr-0;
+  @extend .pt-1;
+  @extend .pb-1;
+  @extend .mr-1;
 }
 
 .ui-list-header {
@@ -20,13 +29,10 @@ $listHeight: 500px;
   @extend .p-2;
 }
 
-.ui-side-list-wrapper {
-  @extend .ui-element-bg-dark;
-  @extend .shadow-sm;
-  @extend .pl-0;
-  @extend .pr-0;
-  @extend .pt-1;
-  border-radius: 2px;
+.ui-list-header {
+  border-bottom-color: $uiElementBorderColor;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
 }
 
 .ui-list-dark {
