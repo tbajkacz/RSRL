@@ -7,18 +7,15 @@ import {
   FormGroup,
   Input,
   ModalFooter,
-  Button,
-  Label
+  Button
 } from "reactstrap";
 import { UserAccountSelectOptionModel } from "../Users/userTypes";
-import { AccessCardModalData, AccessCard } from "./accessCardTypes";
+import {
+  AccessCardModalData,
+  AccessCard,
+  AccessCardOperation
+} from "./accessCardTypes";
 import { useState, useEffect } from "react";
-
-export enum AccessCardOperation {
-  None,
-  Add,
-  Edit
-}
 
 interface AccessCardModalProps {
   operation: AccessCardOperation;
@@ -50,12 +47,13 @@ export default function AccessCardModal(props: AccessCardModalProps) {
         if (props.currentData) {
           setModalData({
             id: props.currentData.id,
-            ownerLogin: props.currentData.owner.login
+            ownerLogin: props.currentData.owner
+              ? props.currentData.owner.login
+              : ""
           });
         }
         break;
     }
-    console.log(modalData);
   }, [props.isOpen]);
 
   const renderUserOptions = () => {
@@ -87,7 +85,9 @@ export default function AccessCardModal(props: AccessCardModalProps) {
 
   return (
     <Modal isOpen={props.isOpen} toggle={props.toggle}>
-      <ModalHeader>Modal</ModalHeader>
+      <ModalHeader>
+        {AccessCardOperation[props.operation] + " access card"}
+      </ModalHeader>
       <ModalBody>
         <Form>
           <FormGroup>

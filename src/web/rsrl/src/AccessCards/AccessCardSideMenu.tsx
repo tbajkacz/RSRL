@@ -3,19 +3,17 @@ import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { combineClasses } from "../Common/ComponentUtility";
+import { AccessCardOperation } from "./accessCardTypes";
 
 interface AccessCardSideMenuProps {
   isItemSelected: boolean;
-  onAddClick: () => void;
-  onUpdateClick: () => void;
-  onRemoveClick: () => void;
+  onClick: (option: AccessCardOperation) => void;
 }
 
 export default function AccessCardSideMenu(props: AccessCardSideMenuProps) {
   const sideMenuElement = (
-    text: string,
+    option: number,
     icon: IconDefinition,
-    onClick: () => void,
     disabled: boolean
   ) => {
     return (
@@ -24,30 +22,29 @@ export default function AccessCardSideMenu(props: AccessCardSideMenuProps) {
           "ui-side-list-item-dark",
           disabled ? "ui-disabled" : ""
         )}
-        onClick={disabled ? undefined : onClick}
+        onClick={
+          disabled
+            ? undefined
+            : () => props.onClick(option as AccessCardOperation)
+        }
       >
         <span>
           <FontAwesomeIcon icon={icon} />
         </span>
-        {text}
+        {AccessCardOperation[option]}
       </li>
     );
   };
 
   const sideMenuElements = [
-    sideMenuElement("Add", faPlus, props.onAddClick, false),
-    sideMenuElement("Edit", faPen, props.onUpdateClick, !props.isItemSelected),
-    sideMenuElement(
-      "Remove",
-      faTrash,
-      props.onRemoveClick,
-      !props.isItemSelected
-    )
+    sideMenuElement(AccessCardOperation.Add, faPlus, false),
+    sideMenuElement(AccessCardOperation.Edit, faPen, !props.isItemSelected),
+    sideMenuElement(AccessCardOperation.Remove, faTrash, true)
   ];
 
   return (
-    <div className="ui-side-list-wrapper col-sm-1 mr-1">
-      <ul className="ui-list-dark flex-fill">{sideMenuElements}</ul>
+    <div className="ui-list-wrapper ui-side-list-wrapper col-sm-1">
+      <ul className="ui-list-dark">{sideMenuElements}</ul>
     </div>
   );
 }

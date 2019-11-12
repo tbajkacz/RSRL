@@ -19,3 +19,10 @@ export interface AccessCardModalData {
   id: string;
   ownerLogin: string;
 }
+
+export enum AccessCardOperation {
+  None,
+  Add,
+  Edit,
+  Remove
+}
