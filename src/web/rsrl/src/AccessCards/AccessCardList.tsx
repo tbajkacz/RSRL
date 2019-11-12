@@ -2,22 +2,13 @@ import * as React from "react";
 import ScrollableList from "../Common/ScrollableList";
 import { AccessCard, AccessCardModalData } from "./accessCardTypes";
 import { accessCardsService } from "./AccessCardsService";
-import {
-  ListGroupItem,
-  Modal,
-  ModalHeader,
-  Form,
-  ModalBody,
-  ModalFooter,
-  Button,
-  Input,
-  FormGroup
-} from "reactstrap";
+import { ListGroupItem } from "reactstrap";
 import useEffectAsync from "../Common/useEffectAsync";
 import { useState } from "react";
 import LoadingIndicator from "../LoadingIndicator";
 import { userService } from "../Users/UserService";
 import { UserAccountSelectOptionModel } from "../Users/userTypes";
+import AccessCardModal, { AccessCardOperation } from "./AccessCardModal";
 
 interface AccessCardListProps {
   className?: string;
@@ -29,14 +20,21 @@ export default function AccessCardList(props: AccessCardListProps) {
   const [loadingPromise, setLoadingPromise] = useState<
     Promise<any> | undefined
   >();
+  const [modalPromise, setModalPromise] = useState<Promise<any> | undefined>();
   const [selected, setSelected] = useState<AccessCard>();
-  const [useEffectChanged, setUseEffectChanged] = useState(false);
+  const [elementChangedTrigger] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [modalOperation, setModalOperation] = useState(
+    AccessCardOperation.None
+  );
+
+  const toggle = () => setIsOpen(!isOpen);
 
   useEffectAsync(async () => {
     let promise = accessCardsService.Get();
     setLoadingPromise(promise);
     setAccessCards((await promise).result);
-  }, [useEffectChanged]);
+  }, [elementChangedTrigger]);
 
   const renderer = (accessCard: AccessCard) => {
     let itemClass =
@@ -53,8 +51,10 @@ export default function AccessCardList(props: AccessCardListProps) {
     );
   };
 
-  const add = async () => {
-    let response = await userService.Get();
+  const updateUserInfos = async () => {
+    let promise = userService.Get();
+    setModalPromise(promise);
+    let response = await promise;
 
     setUserInfos(
       response.result.map(u => {
@@ -64,60 +64,61 @@ export default function AccessCardList(props: AccessCardListProps) {
         };
       })
     );
+  };
+
+  const add = async () => {
+    setModalOperation(AccessCardOperation.Add);
+    await updateUserInfos();
     toggle();
   };
 
-  const update = () => {
-    console.log("to be updated");
-    console.log(selected);
+  const update = async () => {
+    setModalOperation(AccessCardOperation.Edit);
+    await updateUserInfos();
+    toggle();
   };
 
   const remove = () => {
     console.log("remove");
   };
 
-  const [modal, setModal] = useState(false);
-
-  const toggle = () => setModal(!modal);
-
-  const renderUserOptions = () => {
-    if (userInfos) {
-      return userInfos.map(u => <option>{u.login}</option>);
-    }
+  const getUserId = (login: string) => {
+    let users = userInfos!.filter(u => u.login === login);
+    return users.length > 0 ? users[0].id : 0;
   };
 
-  const [accessCardModalData, setAccessCardModalData] = useState<
-    AccessCardModalData
-  >();
-
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let copy = { ...accessCardModalData! };
-    copy.id = e.currentTarget.value;
-    setAccessCardModalData(copy);
+  const requestAdd = async (accessCardModalData: AccessCardModalData) => {
+    await accessCardsService.Add({
+      id: accessCardModalData.id,
+      ownerId: getUserId(accessCardModalData.ownerLogin)
+    });
   };
 
-  const onSelectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    let copy = { ...accessCardModalData! };
-    if (userInfos) {
-      copy.ownerId = userInfos.filter(
-        u => u.login === e.currentTarget.selectedOptions[0].value
-      )[0].id;
-      setAccessCardModalData(copy);
-    }
+  const requestEdit = async (accessCardModalData: AccessCardModalData) => {
+    await accessCardsService.Update({
+      id: accessCardModalData.id,
+      ownerId: getUserId(accessCardModalData.ownerLogin)
+    });
   };
 
-  const requestAdd = async () => {
-    if (accessCardModalData) {
-      await accessCardsService.Add({
-        id: accessCardModalData.id,
-        ownerId: accessCardModalData.ownerId
-      });
-      setUseEffectChanged(!useEffectChanged);
+  const onModalConfirm = (
+    modifiedData: AccessCardModalData | undefined,
+    operation: AccessCardOperation
+  ) => {
+    if (modifiedData) {
+      switch (operation) {
+        case AccessCardOperation.Add:
+          requestAdd(modifiedData);
+          break;
+        case AccessCardOperation.Edit:
+          requestEdit(modifiedData);
+          break;
+      }
     }
   };
 
   return (
-    <div>
+    <div className={props.className}>
       <ScrollableList<AccessCard>
         data={accessCards}
         rowRenderer={renderer}
@@ -126,30 +127,16 @@ export default function AccessCardList(props: AccessCardListProps) {
         onUpdateClick={update}
         onRemoveClick={remove}
       />
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader>Modal</ModalHeader>
-        <ModalBody>
-          <Form>
-            <FormGroup>
-              <Input name="id" placeholder="id" onChange={onChangeHandler} />
-            </FormGroup>
-            <FormGroup>
-              <select className="form-control" onChange={onSelectHandler}>
-                <option></option>
-                {renderUserOptions()}
-              </select>
-            </FormGroup>
-          </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={requestAdd}>
-            Add
-          </Button>
-          <Button color="secondary" onClick={toggle}>
-            Cancel
-          </Button>
-        </ModalFooter>
-      </Modal>
+      <LoadingIndicator promise={modalPromise} asModal={true}>
+        <AccessCardModal
+          operation={modalOperation}
+          isOpen={isOpen}
+          toggle={toggle}
+          userInfos={userInfos}
+          onConfirm={onModalConfirm}
+          currentData={selected}
+        />
+      </LoadingIndicator>
     </div>
   );
 }

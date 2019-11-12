@@ -17,5 +17,5 @@ export interface AccessCardUpdateParams {
 
 export interface AccessCardModalData {
   id: string;
-  ownerId: number;
+  ownerLogin: string;
 }
