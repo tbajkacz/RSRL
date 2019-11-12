@@ -43,6 +43,8 @@ $listHeight: 500px;
   @extend .ui-element-bg-dark;
   &:not(.ui-selected):hover {
     background-color: $uiElementHoverBgColor;
+  }
+  &:hover {
     cursor: pointer;
   }
   border-top: 0;
@@ -70,4 +72,9 @@ $listHeight: 500px;
   span {
     @extend .mr-2;
   }
+}
+
+.ui-disabled {
+  background-color: $uiElementBasicBgColor !important;
+  color: $uiElementDisabledColor !important;
 }
