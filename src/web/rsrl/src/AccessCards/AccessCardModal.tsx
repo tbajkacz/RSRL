@@ -7,7 +7,8 @@ import {
   FormGroup,
   Input,
   ModalFooter,
-  Button
+  Button,
+  Label
 } from "reactstrap";
 import { UserAccountSelectOptionModel } from "../Users/userTypes";
 import { AccessCardModalData, AccessCard } from "./accessCardTypes";
@@ -81,6 +82,7 @@ export default function AccessCardModal(props: AccessCardModalProps) {
 
   const onSubmit = () => {
     props.onConfirm(modalData, props.operation);
+    props.toggle();
   };
 
   return (
