@@ -22,7 +22,7 @@ export default function AccessCardList(props: AccessCardListProps) {
   >();
   const [modalPromise, setModalPromise] = useState<Promise<any> | undefined>();
   const [selected, setSelected] = useState<AccessCard>();
-  const [elementChangedTrigger] = useState(false);
+  const [dataChanged, setDataChanged] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [modalOperation, setModalOperation] = useState(
     AccessCardOperation.None
@@ -34,19 +34,22 @@ export default function AccessCardList(props: AccessCardListProps) {
     let promise = accessCardsService.Get();
     setLoadingPromise(promise);
     setAccessCards((await promise).result);
-  }, [elementChangedTrigger]);
+  }, [dataChanged]);
 
   const renderer = (accessCard: AccessCard) => {
     let itemClass =
       selected === accessCard
         ? "ui-list-item-dark ui-selected"
         : "ui-list-item-dark";
+
+    let ownerLogin = accessCard.owner ? accessCard.owner.login : "unowned";
     return (
       <ListGroupItem
         onClick={() => setSelected(accessCard)}
         className={itemClass}
       >
-        {accessCard.id}
+        <div>Card id: {accessCard.id}</div>
+        <div>Owner: {ownerLogin}</div>
       </ListGroupItem>
     );
   };
@@ -92,6 +95,7 @@ export default function AccessCardList(props: AccessCardListProps) {
       id: accessCardModalData.id,
       ownerId: getUserId(accessCardModalData.ownerLogin)
     });
+    setDataChanged(!dataChanged);
   };
 
   const requestEdit = async (accessCardModalData: AccessCardModalData) => {
@@ -99,6 +103,7 @@ export default function AccessCardList(props: AccessCardListProps) {
       id: accessCardModalData.id,
       ownerId: getUserId(accessCardModalData.ownerLogin)
     });
+    setDataChanged(!dataChanged);
   };
 
   const onModalConfirm = (
@@ -120,6 +125,7 @@ export default function AccessCardList(props: AccessCardListProps) {
   return (
     <div className={props.className}>
       <ScrollableList<AccessCard>
+        isItemSelected={selected ? true : false}
         data={accessCards}
         rowRenderer={renderer}
         loadingPromise={loadingPromise}
