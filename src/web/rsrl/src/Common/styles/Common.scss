@@ -22,3 +22,7 @@ input:focus {
 .ui-selected {
   background-color: $uiElementActiveBgColor !important;
 }
+
+.ui-bg-transparent * {
+  background-color: transparent !important;
+}
