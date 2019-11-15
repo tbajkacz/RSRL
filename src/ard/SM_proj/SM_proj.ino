@@ -1,3 +1,12 @@
+#include <PinChangeInterrupt.h>
+#include <OneWire.h>
+
+#define LED_R 6
+#define LED_G 7
+#define LED_B 8
+#define PIR 5
+#define transmitter 4
+
 #include <SPI.h>
 #include <MFRC522.h>
 
@@ -8,12 +17,24 @@ MFRC522 rfid(10, 9);
 MFRC522::MIFARE_Key key;
 boolean stan = false;
 unsigned long czas;
+int movementDetection = 0;
 
 void setup() {
+  pinMode(PIR, INPUT);
+  pinMode(LED_R, OUTPUT);
+  pinMode(LED_G, OUTPUT);
+  pinMode(LED_B, OUTPUT);
+  pinMode(transmitter, OUTPUT);
   Serial.begin(9600);
   SPI.begin();
   rfid.PCD_Init();
-  pinMode(2, OUTPUT);
+
+  digitalWrite(LED_R, LOW);
+  digitalWrite(LED_G, LOW);
+  digitalWrite(LED_B, LOW);
+  digitalWrite(transmitter, HIGH);
+  
+  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(PIR), movementDetect, RISING);
 }
 
 void loop() {
@@ -39,5 +60,11 @@ void loop() {
   if (stan && czas < millis())
     stan = false;
 
-  digitalWrite(2, stan)  ;
+  digitalWrite(transmitter, stan)  ;
+
+}
+
+ void movementDetect()
+{
+  //zapal leda
 }
