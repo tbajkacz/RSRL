@@ -39,7 +39,7 @@ export default function AccessCardSideMenu(props: AccessCardSideMenuProps) {
   const sideMenuElements = [
     sideMenuElement(AccessCardOperation.Add, faPlus, false),
     sideMenuElement(AccessCardOperation.Edit, faPen, !props.isItemSelected),
-    sideMenuElement(AccessCardOperation.Remove, faTrash, true)
+    sideMenuElement(AccessCardOperation.Remove, faTrash, !props.isItemSelected)
   ];
 
   return (
