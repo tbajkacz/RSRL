@@ -16,6 +16,8 @@ import {
   AccessCardOperation
 } from "./accessCardTypes";
 import { useState, useEffect } from "react";
+import useForm from "react-hook-form";
+import { FormInputConfig, FormInput } from "../Common/FormInput";
 
 interface AccessCardModalProps {
   operation: AccessCardOperation;
@@ -37,6 +39,8 @@ export default function AccessCardModal(props: AccessCardModalProps) {
   const [modalData, setModalData] = useState<AccessCardModalData>(
     modalDataDefaultValue
   );
+
+  const { register, handleSubmit, errors } = useForm();
 
   useEffect(() => {
     switch (props.operation) {
@@ -76,9 +80,25 @@ export default function AccessCardModal(props: AccessCardModalProps) {
     }
   };
 
-  const onSubmit = () => {
+  const onSubmit = (data: any) => {
+    console.log(data);
     props.onConfirm(modalData, props.operation);
     props.toggle();
+  };
+
+  const isInputDisabled = (name: string) => {
+    switch (name) {
+      case "id":
+        return props.operation === AccessCardOperation.Edit;
+        break;
+    }
+    return false;
+  };
+
+  const inputConfig: FormInputConfig = {
+    onChange: onChangeHandler,
+    isDisabled: isInputDisabled,
+    errors
   };
 
   return (
@@ -88,15 +108,14 @@ export default function AccessCardModal(props: AccessCardModalProps) {
       </ModalHeader>
       <ModalBody>
         <Form>
-          <FormGroup>
-            <Input
-              name="id"
-              placeholder="id"
-              onChange={onChangeHandler}
-              disabled={props.operation === AccessCardOperation.Edit}
-              defaultValue={modalData.id}
-            />
-          </FormGroup>
+          <FormInput
+            config={inputConfig}
+            name="id"
+            defaultValue={modalData.id}
+            inputRef={register({
+              required: true
+            })}
+          />
           <FormGroup>
             <select className="form-control" onChange={onSelectHandler}>
               <option></option>
@@ -106,7 +125,7 @@ export default function AccessCardModal(props: AccessCardModalProps) {
         </Form>
       </ModalBody>
       <ModalFooter>
-        <Button color="primary" onClick={onSubmit}>
+        <Button color="primary" onClick={handleSubmit(onSubmit)}>
           Accept
         </Button>
         <Button color="secondary" onClick={props.toggle}>
