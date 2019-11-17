@@ -65,9 +65,7 @@ export default function AccessCardModal(props: AccessCardModalProps) {
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let copy = { ...modalData! };
-    copy.id = e.currentTarget.value;
-    setModalData(copy);
+    setModalData({ ...modalData, id: e.currentTarget.value });
   };
 
   const onSelectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -96,7 +94,7 @@ export default function AccessCardModal(props: AccessCardModalProps) {
               placeholder="id"
               onChange={onChangeHandler}
               disabled={props.operation === AccessCardOperation.Edit}
-              value={modalData.id}
+              defaultValue={modalData.id}
             />
           </FormGroup>
           <FormGroup>
