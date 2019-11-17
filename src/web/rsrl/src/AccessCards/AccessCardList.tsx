@@ -5,7 +5,6 @@ import {
   AccessCardOperation
 } from "./accessCardTypes";
 import { accessCardsService } from "./AccessCardsService";
-import { ListGroupItem } from "reactstrap";
 import useEffectAsync from "../Common/useEffectAsync";
 import { useState } from "react";
 import LoadingIndicator from "../LoadingIndicator";
@@ -14,7 +13,7 @@ import { UserAccountSelectOptionModel } from "../Users/userTypes";
 import AccessCardModal from "./AccessCardModal";
 import AccessCardSideMenu from "./AccessCardSideMenu";
 import AccessCardItem from "./AccessCardItem";
-import { requestAdd, requestEdit } from "./AccessCardHelpers";
+import { accessCardHelpers } from "./accessCardHelpers";
 
 interface AccessCardListProps {
   className?: string;
@@ -58,14 +57,15 @@ export default function AccessCardList(props: AccessCardListProps) {
   };
 
   const onSideMenuClick = async (option: AccessCardOperation) => {
+    setModalOperation(option);
     switch (option) {
       case AccessCardOperation.Add:
       case AccessCardOperation.Edit:
-        setModalOperation(option);
         await updateUserInfos();
         toggle();
         break;
       case AccessCardOperation.Remove:
+        accessCardHelpers.requestRemove(selected!.id, onRequestCompleted);
         break;
       default:
         break;
@@ -88,14 +88,14 @@ export default function AccessCardList(props: AccessCardListProps) {
     if (modifiedData) {
       switch (operation) {
         case AccessCardOperation.Add:
-          requestAdd(
+          accessCardHelpers.requestAdd(
             modifiedData,
             findUserIdByLogin(modifiedData.ownerLogin),
             onRequestCompleted
           );
           break;
         case AccessCardOperation.Edit:
-          requestEdit(
+          accessCardHelpers.requestEdit(
             modifiedData,
             findUserIdByLogin(modifiedData.ownerLogin),
             onRequestCompleted
