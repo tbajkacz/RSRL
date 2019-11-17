@@ -52,5 +52,12 @@ namespace RSRL.Api.Controllers
             await accessCardRepository.UpdateAsync(card);
             await uow.CommitAsync();
         }
+
+        [HttpPost]
+        public async Task Remove(AccessCardRemoveParams param)
+        {
+            await accessCardRepository.DeleteAsync(param.Id);
+            await uow.CommitAsync();
+        }
     }
 }
