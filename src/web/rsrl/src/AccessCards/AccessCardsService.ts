@@ -3,7 +3,8 @@ import axios from "axios";
 import {
   AccessCard,
   AccessCardAddParams,
-  AccessCardUpdateParams
+  AccessCardUpdateParams,
+  AccessCardRemoveParams
 } from "./accessCardTypes";
 import { unwrap } from "../Common/serviceUtility";
 
@@ -20,6 +21,10 @@ class AccessCardsService {
 
   Update(param: AccessCardUpdateParams) {
     return axios.post("AccessCards/Update", param);
+  }
+
+  Delete(param: AccessCardRemoveParams) {
+    return axios.post(`AccessCards/Remove`, param);
   }
 }
 
