@@ -133,6 +133,7 @@ export default function UserAccountModal(props: UserAccountModalProps) {
           <FormInput
             config={config}
             name="password"
+            type="password"
             defaultValue={modalData.password}
             inputRef={register({ required: true })}
           />
