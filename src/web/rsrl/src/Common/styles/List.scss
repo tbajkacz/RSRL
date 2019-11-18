@@ -39,6 +39,7 @@ $listHeight: 500px;
   @extend .list-group;
   overflow: auto;
   max-height: $listHeight;
+  min-height: 500px;
 }
 
 .ui-list-item-dark {
