@@ -8,6 +8,7 @@ using RSRL.Api.Users.Models;
 using RSRL.Api.Users.Params;
 using RSRL.Api.Users.Services;
 using RSRL.Api.Utility;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -53,6 +54,12 @@ namespace RSRL.Api.Controllers
 
             await userSession.UpdateAsync(user);
             await uow.CommitAsync();
+        }
+        
+        [HttpGet]
+        public IEnumerable<string> AvailableRoles()
+        {
+            return Roles.RolesCollection;
         }
     }
 }
