@@ -68,8 +68,8 @@ export default function AccessCardModal(props: AccessCardModalProps) {
     }
   };
 
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setModalData({ ...modalData, id: e.currentTarget.value });
+  const onChangeHandler = (name: string, value: string) => {
+    setModalData({ ...modalData, [name]: value });
   };
 
   const onSelectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
