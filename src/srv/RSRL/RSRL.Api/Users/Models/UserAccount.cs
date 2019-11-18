@@ -22,8 +22,8 @@ namespace RSRL.Api.Users.Models
             Map(x => x.PasswordHash)
                 .Not.Nullable();
             HasMany(x => x.Roles)
-                .Element("Roles")
-                .Cascade.SaveUpdate();
+                .Table("Roles")
+                .Element("Role");
         }
     }
 }
