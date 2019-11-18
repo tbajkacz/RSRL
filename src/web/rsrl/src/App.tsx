@@ -9,6 +9,7 @@ import routes from "./Common/Routes";
 import Home from "./Home";
 import AccessCardList from "./AccessCards/AccessCardList";
 import { Navbar, Nav, NavbarBrand, NavItem } from "reactstrap";
+import UserAccountList from "./Users/UserAccountList";
 
 const history = createBrowserHistory();
 
@@ -28,6 +29,11 @@ function App() {
                 Access cards
               </Link>
             </NavItem>
+            <NavItem>
+              <Link className="ui-nav-link" to={routes.UserAccounts}>
+                Users
+              </Link>
+            </NavItem>
           </Nav>
           <UserMenu />
         </Navbar>
@@ -38,6 +44,9 @@ function App() {
             </Route>
             <Route path={routes.AccessCards}>
               <AccessCardList />
+            </Route>
+            <Route path={routes.UserAccounts}>
+              <UserAccountList />
             </Route>
             <Route path={routes.Login}>
               <Login className="d-flex justify-content-center mt-5" />

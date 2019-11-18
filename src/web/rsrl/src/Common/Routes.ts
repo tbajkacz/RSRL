@@ -1,7 +1,8 @@
 const routes = {
   Home: "/home",
   Login: "/login",
-  AccessCards: "/accessCards"
+  AccessCards: "/accessCards",
+  UserAccounts: "/userAccounts"
 };
 
 export default routes;
