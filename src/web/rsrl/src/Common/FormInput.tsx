@@ -45,7 +45,11 @@ export function FormInput(props: FormInputProps) {
         disabled={props.config.isDisabled(props.name)}
         hidden={isHidden()}
         defaultValue={props.defaultValue}
-        ref={isHidden() ? undefined : props.inputRef}
+        ref={
+          isHidden() || props.config.isDisabled(props.name)
+            ? undefined
+            : props.inputRef
+        }
       />
       <span className="text-danger">{renderError()}</span>
     </FormGroup>
