@@ -13,7 +13,7 @@ interface FormInputProps {
   config: FormInputConfig;
   name: string;
   type?: "text" | "number" | "password";
-  defaultValue: string | number;
+  defaultValue?: string | number;
   errorMsg?: string;
   inputRef: (instance: HTMLInputElement | null) => void;
 }
