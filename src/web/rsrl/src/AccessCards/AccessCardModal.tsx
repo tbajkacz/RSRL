@@ -43,10 +43,8 @@ export default function AccessCardModal(props: AccessCardModalProps) {
   const { register, handleSubmit, errors } = useForm();
 
   useEffect(() => {
+    setModalData(modalDataDefaultValue);
     switch (props.operation) {
-      case AccessCardOperation.Add:
-        setModalData(modalDataDefaultValue);
-        break;
       case AccessCardOperation.Edit:
         if (props.currentData) {
           setModalData({
