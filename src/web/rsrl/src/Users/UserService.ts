@@ -3,7 +3,8 @@ import {
   UserAccount,
   UserAccountAddParams,
   UserAccountUpdateParams,
-  UserAccountRemoveParams
+  UserAccountRemoveParams,
+  UserAccountUpdatePasswordParams
 } from "./userTypes";
 import { ApiResponse } from "../Common/types";
 import { unwrap } from "../Common/serviceUtility";
@@ -19,6 +20,13 @@ class UserService {
 
   Update(param: UserAccountUpdateParams) {
     return axios.post<ApiResponse<any>>("User/Update", param).then(unwrap);
+  }
+
+  UpdatePassword(param: UserAccountUpdatePasswordParams) {
+    console.log(param);
+    return axios
+      .post<ApiResponse<any>>("User/UpdatePassword", param)
+      .then(unwrap);
   }
 
   Delete(param: UserAccountRemoveParams) {

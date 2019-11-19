@@ -43,13 +43,12 @@ export default function UserAccountModal(props: UserAccountModalProps) {
     modalDataDefaultValue
   );
 
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, getValues } = useForm();
 
   useEffect(() => {
+    setModalData(modalDataDefaultValue);
     switch (props.operation) {
-      case UserAccountOperation.Add:
-        setModalData(modalDataDefaultValue);
-        break;
+      case UserAccountOperation.ChangePassword:
       case UserAccountOperation.Edit:
         if (props.currentData) {
           setModalData({
@@ -88,8 +87,14 @@ export default function UserAccountModal(props: UserAccountModalProps) {
       case "id":
         return props.operation === UserAccountOperation.Add;
       case "password":
+      case "confirmPassword":
         return (
           props.operation !== UserAccountOperation.ChangePassword &&
+          props.operation !== UserAccountOperation.Add
+        );
+      case "roles":
+        return (
+          props.operation !== UserAccountOperation.Edit &&
           props.operation !== UserAccountOperation.Add
         );
     }
@@ -100,6 +105,8 @@ export default function UserAccountModal(props: UserAccountModalProps) {
     switch (name) {
       case "id":
         return true;
+      case "login":
+        return props.operation === UserAccountOperation.ChangePassword;
     }
     return false;
   };
@@ -134,10 +141,19 @@ export default function UserAccountModal(props: UserAccountModalProps) {
             config={config}
             name="password"
             type="password"
-            defaultValue={modalData.password}
             inputRef={register({ required: true })}
           />
-          <FormGroup>
+          <FormInput
+            config={config}
+            name="confirmPassword"
+            type="password"
+            errorMsg="Passwords must match"
+            inputRef={register({
+              required: true,
+              validate: val => val === getValues()["password"]
+            })}
+          />
+          <FormGroup hidden={isInputHidden("roles")}>
             <Select
               options={
                 props.userRoles

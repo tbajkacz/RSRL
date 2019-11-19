@@ -62,6 +62,9 @@ export default function UserAccountList(props: UserAccountListProps) {
       case UserAccountOperation.Remove:
         await userHelpers.requestRemove(selected!.id, onRequestCompleted);
         break;
+      case UserAccountOperation.ChangePassword:
+        toggle();
+        break;
     }
   };
 
@@ -76,6 +79,9 @@ export default function UserAccountList(props: UserAccountListProps) {
           break;
         case UserAccountOperation.Edit:
           userHelpers.requestUpdate(data, onRequestCompleted);
+          break;
+        case UserAccountOperation.ChangePassword:
+          userHelpers.requestChangePassword(data, onRequestCompleted);
           break;
       }
     }

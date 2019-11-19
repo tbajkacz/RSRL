@@ -25,6 +25,18 @@ class UserAccountHelpers {
   requestRemove(id: number, onRequestCompleted: () => void) {
     userService.Delete({ id }).then(onRequestCompleted);
   }
+
+  requestChangePassword(
+    data: UserAccountModalData,
+    onRequestCompleted: () => void
+  ) {
+    userService
+      .UpdatePassword({
+        id: data.id,
+        password: data.password
+      })
+      .then(onRequestCompleted);
+  }
 }
 
 export const userHelpers = new UserAccountHelpers();

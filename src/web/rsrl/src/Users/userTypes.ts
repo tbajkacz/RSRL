@@ -25,6 +25,11 @@ export interface UserAccountSelectOptionModel {
   login: string;
 }
 
+export interface UserAccountUpdatePasswordParams {
+  id: number;
+  password: string;
+}
+
 export interface UserAccountModalData {
   id: number;
   login: string;

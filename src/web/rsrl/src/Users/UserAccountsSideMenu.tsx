@@ -3,7 +3,12 @@ import { UserAccountOperation } from "./userTypes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { combineClasses } from "../Common/ComponentUtility";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import { faPlus, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlus,
+  faPen,
+  faTrash,
+  faLock
+} from "@fortawesome/free-solid-svg-icons";
 
 interface UserAccountsSideMenuProps {
   onClick: (option: UserAccountOperation) => void;
@@ -11,6 +16,10 @@ interface UserAccountsSideMenuProps {
 }
 
 export default function UserAccountsSideMenu(props: UserAccountsSideMenuProps) {
+  const spaceOnUpper = (s: string) => {
+    return s.match(/[A-Z][a-z]+|[0-9]+/g)!.join(" ");
+  };
+
   const sideMenuElement = (
     option: number,
     icon: IconDefinition,
@@ -31,7 +40,7 @@ export default function UserAccountsSideMenu(props: UserAccountsSideMenuProps) {
         <span>
           <FontAwesomeIcon icon={icon} />
         </span>
-        {UserAccountOperation[option]}
+        {spaceOnUpper(UserAccountOperation[option])}
       </li>
     );
   };
@@ -39,11 +48,20 @@ export default function UserAccountsSideMenu(props: UserAccountsSideMenuProps) {
   const sideMenuElements = [
     sideMenuElement(UserAccountOperation.Add, faPlus, false),
     sideMenuElement(UserAccountOperation.Edit, faPen, !props.isItemSelected),
-    sideMenuElement(UserAccountOperation.Remove, faTrash, !props.isItemSelected)
+    sideMenuElement(
+      UserAccountOperation.Remove,
+      faTrash,
+      !props.isItemSelected
+    ),
+    sideMenuElement(
+      UserAccountOperation.ChangePassword,
+      faLock,
+      !props.isItemSelected
+    )
   ];
 
   return (
-    <div className="ui-list-wrapper ui-side-list-wrapper col-sm-1">
+    <div className="ui-list-wrapper ui-side-list-wrapper">
       <ul className="ui-list-dark">{sideMenuElements}</ul>
     </div>
   );
