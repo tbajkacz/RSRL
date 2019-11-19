@@ -5,6 +5,7 @@ using RSRL.Api.Auth.Params;
 using RSRL.Api.Auth.Services;
 using RSRL.Api.Db.Services;
 using RSRL.Api.Users.Models;
+using RSRL.Api.Users.Params;
 
 namespace RSRL.Api.Users.Services
 {
@@ -16,6 +17,13 @@ namespace RSRL.Api.Users.Services
             : base(session)
         {
             this.hashService = hashService;
+        }
+
+        public async Task UpdatePasswordAsync(UserUpdatePasswordParams param)
+        {
+            var user = await GetByIdAsync(param.Id);
+            user.PasswordHash = hashService.Hash(param.Password);
+            await UpdateAsync(user);
         }
 
         public async Task<UserAccount> ValidateCredentialsAsync(AuthParams param)

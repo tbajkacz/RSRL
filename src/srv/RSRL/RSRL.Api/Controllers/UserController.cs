@@ -55,6 +55,13 @@ namespace RSRL.Api.Controllers
             await userSession.UpdateAsync(user);
             await uow.CommitAsync();
         }
+
+        [HttpPost]
+        public async Task UpdatePassword(UserUpdatePasswordParams param)
+        {
+            await userSession.UpdatePasswordAsync(param);
+            await uow.CommitAsync();
+        }
         
         [HttpGet]
         public IEnumerable<string> AvailableRoles()
