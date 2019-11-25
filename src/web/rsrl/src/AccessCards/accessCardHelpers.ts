@@ -2,11 +2,7 @@ import { AccessCardModalData } from "./accessCardTypes";
 import { accessCardsService } from "./AccessCardsService";
 
 class AccessCardHelpers {
-  requestAdd(
-    accessCardModalData: AccessCardModalData,
-    userId: number,
-    onRequestCompleted: () => void
-  ) {
+  requestAdd(accessCardModalData: AccessCardModalData, userId: number, onRequestCompleted: () => void) {
     accessCardsService
       .Add({
         id: accessCardModalData.id,
@@ -15,11 +11,7 @@ class AccessCardHelpers {
       .then(onRequestCompleted);
   }
 
-  requestEdit(
-    accessCardModalData: AccessCardModalData,
-    userId: number,
-    onRequestCompleted: () => void
-  ) {
+  requestEdit(accessCardModalData: AccessCardModalData, userId: number, onRequestCompleted: () => void) {
     accessCardsService
       .Update({
         id: accessCardModalData.id,

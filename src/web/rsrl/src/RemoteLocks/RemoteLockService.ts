@@ -27,9 +27,7 @@ class RemoteLockService {
   }
 
   ToggleBlock(param: RemoteLockToggleBlockParams) {
-    return axios
-      .post<ApiResponse<any>>("Locks/ToggleBlock", param)
-      .then(unwrap);
+    return axios.post<ApiResponse<any>>("Locks/ToggleBlock", param).then(unwrap);
   }
 
   Unlock(param: RemoteLockUnlockParams) {

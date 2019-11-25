@@ -1,9 +1,5 @@
 import * as React from "react";
-import {
-  AccessCard,
-  AccessCardModalData,
-  AccessCardOperation
-} from "./accessCardTypes";
+import { AccessCard, AccessCardModalData, AccessCardOperation } from "./accessCardTypes";
 import { accessCardsService } from "./AccessCardsService";
 import useEffectAsync from "../Common/useEffectAsync";
 import { useState } from "react";
@@ -22,16 +18,12 @@ interface AccessCardListProps {
 export default function AccessCardList(props: AccessCardListProps) {
   const [accessCards, setAccessCards] = useState<AccessCard[]>();
   const [userInfos, setUserInfos] = useState<UserAccountSelectOptionModel[]>();
-  const [loadingPromise, setLoadingPromise] = useState<
-    Promise<any> | undefined
-  >();
+  const [loadingPromise, setLoadingPromise] = useState<Promise<any> | undefined>();
   const [modalPromise, setModalPromise] = useState<Promise<any> | undefined>();
   const [selected, setSelected] = useState<AccessCard>();
   const [dataChanged, setDataChanged] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [modalOperation, setModalOperation] = useState(
-    AccessCardOperation.None
-  );
+  const [modalOperation, setModalOperation] = useState(AccessCardOperation.None);
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -81,25 +73,14 @@ export default function AccessCardList(props: AccessCardListProps) {
     setDataChanged(!dataChanged);
   };
 
-  const onModalConfirm = (
-    modifiedData: AccessCardModalData | undefined,
-    operation: AccessCardOperation
-  ) => {
+  const onModalConfirm = (modifiedData: AccessCardModalData | undefined, operation: AccessCardOperation) => {
     if (modifiedData) {
       switch (operation) {
         case AccessCardOperation.Add:
-          accessCardHelpers.requestAdd(
-            modifiedData,
-            findUserIdByLogin(modifiedData.ownerLogin),
-            onRequestCompleted
-          );
+          accessCardHelpers.requestAdd(modifiedData, findUserIdByLogin(modifiedData.ownerLogin), onRequestCompleted);
           break;
         case AccessCardOperation.Edit:
-          accessCardHelpers.requestEdit(
-            modifiedData,
-            findUserIdByLogin(modifiedData.ownerLogin),
-            onRequestCompleted
-          );
+          accessCardHelpers.requestEdit(modifiedData, findUserIdByLogin(modifiedData.ownerLogin), onRequestCompleted);
           break;
       }
     }
@@ -111,19 +92,12 @@ export default function AccessCardList(props: AccessCardListProps) {
         <div className={props.className}>
           {accessCards ? (
             <div className="ui-list-flex-container">
-              <AccessCardSideMenu
-                onClick={onSideMenuClick}
-                isItemSelected={selected ? true : false}
-              />
+              <AccessCardSideMenu onClick={onSideMenuClick} isItemSelected={selected ? true : false} />
               <div className="ui-list-wrapper col-sm-7">
                 <h6 className="ui-list-header">Access Cards</h6>
                 <ul className="ui-list-dark">
                   {accessCards.map(c => (
-                    <AccessCardItem
-                      accessCard={c}
-                      onClick={c => setSelected(c)}
-                      isSelected={c === selected}
-                    />
+                    <AccessCardItem accessCard={c} onClick={c => setSelected(c)} isSelected={c === selected} />
                   ))}
                 </ul>
               </div>

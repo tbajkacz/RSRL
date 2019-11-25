@@ -13,9 +13,7 @@ class AuthService {
   }
 
   GetCurrentUser() {
-    return axios
-      .get<ApiResponse<CurrentUser>>("Auth/GetCurrentUser")
-      .then(unwrap);
+    return axios.get<ApiResponse<CurrentUser>>("Auth/GetCurrentUser").then(unwrap);
   }
 }
 

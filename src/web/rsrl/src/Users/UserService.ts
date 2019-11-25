@@ -24,9 +24,7 @@ class UserService {
 
   UpdatePassword(param: UserAccountUpdatePasswordParams) {
     console.log(param);
-    return axios
-      .post<ApiResponse<any>>("User/UpdatePassword", param)
-      .then(unwrap);
+    return axios.post<ApiResponse<any>>("User/UpdatePassword", param).then(unwrap);
   }
 
   Delete(param: UserAccountRemoveParams) {

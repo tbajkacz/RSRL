@@ -3,12 +3,7 @@ import { UserAccountOperation } from "./userTypes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { combineClasses } from "../Common/ComponentUtility";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import {
-  faPlus,
-  faPen,
-  faTrash,
-  faLock
-} from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faPen, faTrash, faLock } from "@fortawesome/free-solid-svg-icons";
 
 interface UserAccountsSideMenuProps {
   onClick: (option: UserAccountOperation) => void;
@@ -20,22 +15,11 @@ export default function UserAccountsSideMenu(props: UserAccountsSideMenuProps) {
     return s.match(/[A-Z][a-z]+|[0-9]+/g)!.join(" ");
   };
 
-  const sideMenuElement = (
-    option: number,
-    icon: IconDefinition,
-    disabled: boolean
-  ) => {
+  const sideMenuElement = (option: number, icon: IconDefinition, disabled: boolean) => {
     return (
       <li
-        className={combineClasses(
-          "ui-side-list-item-dark",
-          disabled ? "ui-disabled" : ""
-        )}
-        onClick={
-          disabled
-            ? undefined
-            : () => props.onClick(option as UserAccountOperation)
-        }
+        className={combineClasses("ui-side-list-item-dark", disabled ? "ui-disabled" : "")}
+        onClick={disabled ? undefined : () => props.onClick(option as UserAccountOperation)}
       >
         <span>
           <FontAwesomeIcon icon={icon} />
@@ -48,16 +32,8 @@ export default function UserAccountsSideMenu(props: UserAccountsSideMenuProps) {
   const sideMenuElements = [
     sideMenuElement(UserAccountOperation.Add, faPlus, false),
     sideMenuElement(UserAccountOperation.Edit, faPen, !props.isItemSelected),
-    sideMenuElement(
-      UserAccountOperation.Remove,
-      faTrash,
-      !props.isItemSelected
-    ),
-    sideMenuElement(
-      UserAccountOperation.ChangePassword,
-      faLock,
-      !props.isItemSelected
-    )
+    sideMenuElement(UserAccountOperation.Remove, faTrash, !props.isItemSelected),
+    sideMenuElement(UserAccountOperation.ChangePassword, faLock, !props.isItemSelected)
   ];
 
   return (

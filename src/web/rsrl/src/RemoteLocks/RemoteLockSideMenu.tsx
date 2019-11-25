@@ -11,22 +11,11 @@ interface RemoteLockSideMenuProps {
 }
 
 export default function RemoteLockSideMenu(props: RemoteLockSideMenuProps) {
-  const sideMenuElement = (
-    option: number,
-    icon: IconDefinition,
-    disabled: boolean
-  ) => {
+  const sideMenuElement = (option: number, icon: IconDefinition, disabled: boolean) => {
     return (
       <li
-        className={combineClasses(
-          "ui-side-list-item-dark",
-          disabled ? "ui-disabled" : ""
-        )}
-        onClick={
-          disabled
-            ? undefined
-            : () => props.onClick(option as RemoteLockOperation)
-        }
+        className={combineClasses("ui-side-list-item-dark", disabled ? "ui-disabled" : "")}
+        onClick={disabled ? undefined : () => props.onClick(option as RemoteLockOperation)}
       >
         <span>
           <FontAwesomeIcon icon={icon} />

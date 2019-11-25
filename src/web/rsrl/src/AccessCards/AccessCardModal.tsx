@@ -1,20 +1,7 @@
 import * as React from "react";
-import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-  Form,
-  FormGroup,
-  Input,
-  ModalFooter,
-  Button
-} from "reactstrap";
+import { Modal, ModalHeader, ModalBody, Form, FormGroup, ModalFooter, Button } from "reactstrap";
 import { UserAccountSelectOptionModel } from "../Users/userTypes";
-import {
-  AccessCardModalData,
-  AccessCard,
-  AccessCardOperation
-} from "./accessCardTypes";
+import { AccessCardModalData, AccessCard, AccessCardOperation } from "./accessCardTypes";
 import { useState, useEffect } from "react";
 import useForm from "react-hook-form";
 import { FormInputConfig, FormInput } from "../Common/FormInput";
@@ -25,10 +12,7 @@ interface AccessCardModalProps {
   userInfos: UserAccountSelectOptionModel[] | undefined;
   isOpen: boolean;
   toggle: () => void;
-  onConfirm: (
-    modifiedData: AccessCardModalData | undefined,
-    operation: AccessCardOperation
-  ) => void;
+  onConfirm: (modifiedData: AccessCardModalData | undefined, operation: AccessCardOperation) => void;
 }
 
 export default function AccessCardModal(props: AccessCardModalProps) {
@@ -36,9 +20,7 @@ export default function AccessCardModal(props: AccessCardModalProps) {
     id: "",
     ownerLogin: ""
   };
-  const [modalData, setModalData] = useState<AccessCardModalData>(
-    modalDataDefaultValue
-  );
+  const [modalData, setModalData] = useState<AccessCardModalData>(modalDataDefaultValue);
 
   const { register, handleSubmit, errors } = useForm();
 
@@ -49,9 +31,7 @@ export default function AccessCardModal(props: AccessCardModalProps) {
         if (props.currentData) {
           setModalData({
             id: props.currentData.id,
-            ownerLogin: props.currentData.owner
-              ? props.currentData.owner.login
-              : ""
+            ownerLogin: props.currentData.owner ? props.currentData.owner.login : ""
           });
         }
         break;
@@ -60,9 +40,7 @@ export default function AccessCardModal(props: AccessCardModalProps) {
 
   const renderUserOptions = () => {
     if (props.userInfos) {
-      return props.userInfos.map(u => (
-        <option selected={modalData.ownerLogin === u.login}>{u.login}</option>
-      ));
+      return props.userInfos.map(u => <option selected={modalData.ownerLogin === u.login}>{u.login}</option>);
     }
   };
 
@@ -101,9 +79,7 @@ export default function AccessCardModal(props: AccessCardModalProps) {
 
   return (
     <Modal isOpen={props.isOpen} toggle={props.toggle}>
-      <ModalHeader>
-        {AccessCardOperation[props.operation] + " access card"}
-      </ModalHeader>
+      <ModalHeader>{AccessCardOperation[props.operation] + " access card"}</ModalHeader>
       <ModalBody>
         <Form>
           <FormInput

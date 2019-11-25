@@ -4,7 +4,7 @@ import { AccessCardOperation } from "../AccessCards/accessCardTypes";
 import { Modal, ModalHeader, ModalBody, Form, FormGroup, Input, ModalFooter, Button } from "reactstrap";
 import useForm from "react-hook-form";
 import { FormInput, FormInputConfig } from "../Common/FormInput";
-import Select, { ValueType, ActionMeta } from "react-select";
+import Select, { ValueType } from "react-select";
 import { isPeselValid } from "./userModalValidation";
 
 interface UserAccountModalProps {

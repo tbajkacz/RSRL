@@ -1,18 +1,11 @@
 import { ApiResponse } from "../Common/types";
 import axios from "axios";
-import {
-  AccessCard,
-  AccessCardAddParams,
-  AccessCardUpdateParams,
-  AccessCardRemoveParams
-} from "./accessCardTypes";
+import { AccessCard, AccessCardAddParams, AccessCardUpdateParams, AccessCardRemoveParams } from "./accessCardTypes";
 import { unwrap } from "../Common/serviceUtility";
 
 class AccessCardsService {
   Get() {
-    return axios
-      .get<ApiResponse<AccessCard[]>>("AccessCards/GetAccessCards")
-      .then(unwrap);
+    return axios.get<ApiResponse<AccessCard[]>>("AccessCards/GetAccessCards").then(unwrap);
   }
 
   Add(param: AccessCardAddParams) {

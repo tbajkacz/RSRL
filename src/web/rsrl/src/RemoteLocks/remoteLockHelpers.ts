@@ -2,10 +2,7 @@ import { RemoteLockModalData } from "./remoteLockTypes";
 import { remoteLockService } from "./RemoteLockService";
 
 class RemoteLockHelpers {
-  requestAdd(
-    accessCardModalData: RemoteLockModalData,
-    onRequestCompleted: () => void
-  ) {
+  requestAdd(accessCardModalData: RemoteLockModalData, onRequestCompleted: () => void) {
     remoteLockService
       .Add({
         name: accessCardModalData.name,
@@ -15,10 +12,7 @@ class RemoteLockHelpers {
       .then(onRequestCompleted);
   }
 
-  requestEdit(
-    accessCardModalData: RemoteLockModalData,
-    onRequestCompleted: () => void
-  ) {
+  requestEdit(accessCardModalData: RemoteLockModalData, onRequestCompleted: () => void) {
     remoteLockService
       .Update({
         id: accessCardModalData.id,

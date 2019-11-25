@@ -21,8 +21,7 @@ interface FormInputProps {
 export function FormInput(props: FormInputProps) {
   const defaultErrorMsg = (name: string) => `Field ${name} is required`;
 
-  const isHidden = () =>
-    props.config.isHidden ? props.config.isHidden(props.name) : false;
+  const isHidden = () => (props.config.isHidden ? props.config.isHidden(props.name) : false);
 
   const renderError = () => {
     if (props.config.errors[props.name] && !isHidden()) {
@@ -33,11 +32,7 @@ export function FormInput(props: FormInputProps) {
   return (
     <FormGroup>
       <input
-        className={
-          props.config.errors[props.name]
-            ? "form-control is-invalid"
-            : "form-control"
-        }
+        className={props.config.errors[props.name] ? "form-control is-invalid" : "form-control"}
         name={props.name}
         type={props.type}
         placeholder={props.name}
@@ -45,11 +40,7 @@ export function FormInput(props: FormInputProps) {
         disabled={props.config.isDisabled(props.name)}
         hidden={isHidden()}
         defaultValue={props.defaultValue}
-        ref={
-          isHidden() || props.config.isDisabled(props.name)
-            ? undefined
-            : props.inputRef
-        }
+        ref={isHidden() || props.config.isDisabled(props.name) ? undefined : props.inputRef}
       />
       <span className="text-danger">{renderError()}</span>
     </FormGroup>

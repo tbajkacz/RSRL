@@ -7,18 +7,7 @@ import "./styles/Login.scss";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthParams } from "./authTypes";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Form,
-  InputGroup,
-  CardFooter,
-  FormGroup,
-  Label,
-  Input,
-  Button
-} from "reactstrap";
+import { Card, CardHeader, CardBody, Form, InputGroup, CardFooter, FormGroup, Label, Input, Button } from "reactstrap";
 
 interface LoginProps {
   className?: string;
@@ -51,9 +40,7 @@ export function Login(props: LoginProps) {
                 <Input
                   type="text"
                   placeholder="username"
-                  onChange={e =>
-                    setParams({ ...params!, login: e.currentTarget.value })
-                  }
+                  onChange={e => setParams({ ...params!, login: e.currentTarget.value })}
                 />
               </InputGroup>
             </FormGroup>
@@ -65,9 +52,7 @@ export function Login(props: LoginProps) {
                 <Input
                   type="password"
                   placeholder="password"
-                  onChange={e =>
-                    setParams({ ...params!, password: e.currentTarget.value })
-                  }
+                  onChange={e => setParams({ ...params!, password: e.currentTarget.value })}
                 />
               </InputGroup>
             </FormGroup>
@@ -84,9 +69,7 @@ export function Login(props: LoginProps) {
         </CardBody>
         <CardFooter>
           <small className="text-white">
-            Don't have an account?{" "}
-            <a href="mailto:tomasz.bajkacz@gmail.com">Contact</a> your
-            administrator
+            Don't have an account? <a href="mailto:tomasz.bajkacz@gmail.com">Contact</a> your administrator
           </small>
         </CardFooter>
       </Card>
