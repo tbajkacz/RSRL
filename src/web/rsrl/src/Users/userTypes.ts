@@ -1,10 +1,16 @@
 export interface UserAccount {
   id: number;
+  name: string;
+  surname: string;
+  pesel: string;
   login: string;
   roles: string[];
 }
 
 export interface UserAccountAddParams {
+  name: string;
+  surname: string;
+  pesel: string;
   login: string;
   password: string;
   roles: string[];
@@ -12,6 +18,9 @@ export interface UserAccountAddParams {
 
 export interface UserAccountUpdateParams {
   id: number;
+  name: string;
+  surname: string;
+  pesel: string;
   login: string;
   roles: string[];
 }
@@ -32,6 +41,9 @@ export interface UserAccountUpdatePasswordParams {
 
 export interface UserAccountModalData {
   id: number;
+  name: string;
+  surname: string;
+  pesel: string;
   login: string;
   password: string;
   roles: string[];

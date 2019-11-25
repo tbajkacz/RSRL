@@ -1,23 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {
-  UserAccountOperation,
-  UserAccount,
-  UserAccountModalData
-} from "./userTypes";
+import { UserAccountOperation, UserAccount, UserAccountModalData } from "./userTypes";
 import { AccessCardOperation } from "../AccessCards/accessCardTypes";
-import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-  Form,
-  FormGroup,
-  Input,
-  ModalFooter,
-  Button
-} from "reactstrap";
+import { Modal, ModalHeader, ModalBody, Form, FormGroup, Input, ModalFooter, Button } from "reactstrap";
 import useForm from "react-hook-form";
 import { FormInput, FormInputConfig } from "../Common/FormInput";
 import Select, { ValueType, ActionMeta } from "react-select";
+import { isPeselValid } from "./userModalValidation";
 
 interface UserAccountModalProps {
   operation: UserAccountOperation;
@@ -25,10 +13,7 @@ interface UserAccountModalProps {
   currentData: UserAccount | undefined;
   isOpen: boolean;
   toggle: () => void;
-  onConfirm: (
-    modifiedData: UserAccountModalData | undefined,
-    operation: UserAccountOperation
-  ) => void;
+  onConfirm: (modifiedData: UserAccountModalData | undefined, operation: UserAccountOperation) => void;
 }
 
 export default function UserAccountModal(props: UserAccountModalProps) {
@@ -36,12 +21,13 @@ export default function UserAccountModal(props: UserAccountModalProps) {
     id: 0,
     login: "",
     password: "",
-    roles: []
+    roles: [],
+    name: "",
+    surname: "",
+    pesel: ""
   };
 
-  const [modalData, setModalData] = useState<UserAccountModalData>(
-    modalDataDefaultValue
-  );
+  const [modalData, setModalData] = useState<UserAccountModalData>(modalDataDefaultValue);
 
   const { register, handleSubmit, errors, getValues } = useForm();
 
@@ -51,20 +37,22 @@ export default function UserAccountModal(props: UserAccountModalProps) {
       case UserAccountOperation.ChangePassword:
       case UserAccountOperation.Edit:
         if (props.currentData) {
-          setModalData({
+          let data: UserAccountModalData = {
             id: props.currentData.id,
             login: props.currentData.login,
+            name: props.currentData.name,
+            surname: props.currentData.surname,
+            pesel: props.currentData.pesel,
             password: "",
             roles: props.currentData.roles
-          });
+          };
+          setModalData(data);
         }
         break;
     }
   }, [props.isOpen]);
 
-  const onSelectChange = (
-    value: ValueType<{ value: string; label: string }>
-  ) => {
+  const onSelectChange = (value: ValueType<{ value: string; label: string }>) => {
     if (Array.isArray(value)) {
       let casted = value as { value: string; label: string }[];
       if (casted) {
@@ -88,15 +76,9 @@ export default function UserAccountModal(props: UserAccountModalProps) {
         return props.operation === UserAccountOperation.Add;
       case "password":
       case "confirmPassword":
-        return (
-          props.operation !== UserAccountOperation.ChangePassword &&
-          props.operation !== UserAccountOperation.Add
-        );
+        return props.operation !== UserAccountOperation.ChangePassword && props.operation !== UserAccountOperation.Add;
       case "roles":
-        return (
-          props.operation !== UserAccountOperation.Edit &&
-          props.operation !== UserAccountOperation.Add
-        );
+        return props.operation !== UserAccountOperation.Edit && props.operation !== UserAccountOperation.Add;
     }
     return false;
   };
@@ -120,16 +102,29 @@ export default function UserAccountModal(props: UserAccountModalProps) {
 
   return (
     <Modal isOpen={props.isOpen} toggle={props.toggle}>
-      <ModalHeader>
-        {UserAccountOperation[props.operation] + " user"}
-      </ModalHeader>
+      <ModalHeader>{UserAccountOperation[props.operation] + " user"}</ModalHeader>
       <ModalBody>
         <Form>
+          <FormInput config={config} name="id" defaultValue={modalData.id} inputRef={register({ required: true })} />
           <FormInput
             config={config}
-            name="id"
-            defaultValue={modalData.id}
+            name="name"
+            defaultValue={modalData.name}
             inputRef={register({ required: true })}
+          />
+          <FormInput
+            config={config}
+            name="surname"
+            defaultValue={modalData.surname}
+            inputRef={register({ required: true })}
+          />
+          <FormInput
+            config={config}
+            type="number"
+            name="pesel"
+            defaultValue={modalData.pesel}
+            errorMsg="You need to provide a valid pesel"
+            inputRef={register({ validate: (val: string) => isPeselValid(val) })}
           />
           <FormInput
             config={config}
@@ -137,12 +132,7 @@ export default function UserAccountModal(props: UserAccountModalProps) {
             defaultValue={modalData.login}
             inputRef={register({ required: true })}
           />
-          <FormInput
-            config={config}
-            name="password"
-            type="password"
-            inputRef={register({ required: true })}
-          />
+          <FormInput config={config} name="password" type="password" inputRef={register({ required: true })} />
           <FormInput
             config={config}
             name="confirmPassword"
@@ -150,16 +140,12 @@ export default function UserAccountModal(props: UserAccountModalProps) {
             errorMsg="Passwords must match"
             inputRef={register({
               required: true,
-              validate: val => val === getValues()["password"]
+              validate: (val: string) => val === getValues()["password"]
             })}
           />
           <FormGroup hidden={isInputHidden("roles")}>
             <Select
-              options={
-                props.userRoles
-                  ? props.userRoles.map(r => ({ value: r, label: r }))
-                  : undefined
-              }
+              options={props.userRoles ? props.userRoles.map(r => ({ value: r, label: r })) : undefined}
               isMulti={true}
               onChange={onSelectChange}
               defaultValue={modalData.roles.map(r => ({ value: r, label: r }))}

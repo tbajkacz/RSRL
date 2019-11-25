@@ -7,7 +7,10 @@ class UserAccountHelpers {
       .Add({
         login: data.login,
         password: data.password,
-        roles: data.roles
+        roles: data.roles,
+        name: data.name,
+        surname: data.surname,
+        pesel: data.pesel
       })
       .then(onRequestCompleted);
   }
@@ -17,7 +20,10 @@ class UserAccountHelpers {
       .Update({
         id: data.id,
         login: data.login,
-        roles: data.roles
+        roles: data.roles,
+        name: data.name,
+        surname: data.surname,
+        pesel: data.pesel
       })
       .then(onRequestCompleted);
   }
@@ -26,10 +32,7 @@ class UserAccountHelpers {
     userService.Delete({ id }).then(onRequestCompleted);
   }
 
-  requestChangePassword(
-    data: UserAccountModalData,
-    onRequestCompleted: () => void
-  ) {
+  requestChangePassword(data: UserAccountModalData, onRequestCompleted: () => void) {
     userService
       .UpdatePassword({
         id: data.id,
