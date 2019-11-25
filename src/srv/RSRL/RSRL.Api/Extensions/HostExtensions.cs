@@ -22,6 +22,9 @@ namespace RSRL.Api.Extensions
             {
                 userSession.AddAsync(new UserAccount
                 {
+                    Name = "root",
+                    Surname = "root",
+                    Pesel = new Pesel("70033065471"),
                     Login = "root",
                     PasswordHash = hashService.Hash("root"),
                     Roles = new List<string> { Roles.Admin },

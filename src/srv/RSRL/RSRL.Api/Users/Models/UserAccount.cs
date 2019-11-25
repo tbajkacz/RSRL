@@ -5,6 +5,12 @@ namespace RSRL.Api.Users.Models
 {
     public class UserAccount : Entity<int>
     {
+        public virtual string Name { get; set; }
+
+        public virtual string Surname { get; set; }
+
+        public virtual Pesel Pesel { get; set; }
+
         public virtual string Login { get; set; }
 
         public virtual string PasswordHash { get; set; }
@@ -16,6 +22,14 @@ namespace RSRL.Api.Users.Models
     {
         public UserAccountMap()
         {
+            Map(x => x.Name)
+                .Not.Nullable();
+            Map(x => x.Surname)
+                .Not.Nullable();
+            References(x => x.Pesel)
+                .Not.Nullable()
+                .Cascade.SaveUpdate()
+                .Cascade.Delete();
             Map(x => x.Login)
                 .Not.Nullable()
                 .Unique();
