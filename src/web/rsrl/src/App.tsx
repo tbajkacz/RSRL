@@ -10,6 +10,7 @@ import Home from "./Home";
 import AccessCardList from "./AccessCards/AccessCardList";
 import { Navbar, Nav, NavbarBrand, NavItem } from "reactstrap";
 import UserAccountList from "./Users/UserAccountList";
+import RemoteLockList from "./RemoteLocks/RemoteLockList";
 
 const history = createBrowserHistory();
 
@@ -34,6 +35,11 @@ function App() {
                 Users
               </Link>
             </NavItem>
+            <NavItem>
+              <Link className="ui-nav-link" to={routes.RemoteLocks}>
+                Remote locks
+              </Link>
+            </NavItem>
           </Nav>
           <UserMenu />
         </Navbar>
@@ -50,6 +56,9 @@ function App() {
             </Route>
             <Route path={routes.Login}>
               <Login className="d-flex justify-content-center mt-5" />
+            </Route>
+            <Route path={routes.RemoteLocks}>
+              <RemoteLockList />
             </Route>
           </Switch>
         </div>
