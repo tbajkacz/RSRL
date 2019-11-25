@@ -5,19 +5,19 @@ import { unwrap } from "../Common/serviceUtility";
 
 class AccessCardsService {
   Get() {
-    return axios.get<ApiResponse<AccessCard[]>>("AccessCards/GetAccessCards").then(unwrap);
+    return axios.get<ApiResponse<AccessCard[]>>("api/AccessCards/GetAccessCards").then(unwrap);
   }
 
   Add(param: AccessCardAddParams) {
-    return axios.post("AccessCards/Add", param);
+    return axios.post("api/AccessCards/Add", param);
   }
 
   Update(param: AccessCardUpdateParams) {
-    return axios.post("AccessCards/Update", param);
+    return axios.post("api/AccessCards/Update", param);
   }
 
   Delete(param: AccessCardRemoveParams) {
-    return axios.post(`AccessCards/Remove`, param);
+    return axios.post(`api/AccessCards/Remove`, param);
   }
 }
 

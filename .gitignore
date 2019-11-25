@@ -374,3 +374,5 @@ yarn-debug.log*
 yarn-error.log*
 *.db
 src/web/rsrl/package-lock.json
+src/web/rsrl/build/
+src/srv/RSRL/RSRL.Api/wwwroot

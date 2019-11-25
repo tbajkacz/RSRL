@@ -2,7 +2,8 @@
   "name": "rsrl",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://localhost:44368/api",
+  "proxy": "https://localhost:44368",
+  "homepage": ".",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
