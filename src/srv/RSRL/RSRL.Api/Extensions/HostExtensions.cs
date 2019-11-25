@@ -24,7 +24,7 @@ namespace RSRL.Api.Extensions
                 {
                     Name = "root",
                     Surname = "root",
-                    Pesel = new Pesel("70033065471"),
+                    Pesel = "70033065471",
                     Login = "root",
                     PasswordHash = hashService.Hash("root"),
                     Roles = new List<string> { Roles.Admin },

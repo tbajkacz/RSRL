@@ -38,10 +38,6 @@ namespace RSRL.Api.Mapper
             CreateMap<AccessCard, AccessCardDto>();
 
             CreateMap<ActionLog, ActionLogDto>();
-            CreateMap<Pesel, string>()
-                .ConvertUsing(p => p.Value);
-            CreateMap<string, Pesel>()
-                .ConvertUsing(s => new Pesel(s));
         }
     }
 }
