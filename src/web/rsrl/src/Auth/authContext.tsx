@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { authService } from "./AuthService";
 import LoadingIndicator from "../LoadingIndicator";
-import { Auth, CurrentUser, AuthParams } from "../Common/types";
+import { Auth, CurrentUser, AuthParams } from "./authTypes";
+import Axios from "axios";
 
 export const AuthContext = React.createContext<Auth>({
   signIn: () => null,
@@ -44,6 +45,20 @@ export function useProvideAuth() {
     setPromise(authService.SignOut());
     setCurrentUser(undefined);
   };
+
+  useEffect(() => {
+    Axios.interceptors.response.use(
+      res => res,
+      error => {
+        if (error.response.status === 401) {
+          setCurrentUser(undefined);
+        }
+        return new Promise((resolve, reject) => {
+          reject(error);
+        });
+      }
+    );
+  }, []);
 
   useEffect(() => {
     setPromise(

@@ -1,0 +1,17 @@
+@import "../Common/styles/Variables.scss";
+@import "../../node_modules/bootstrap";
+
+body {
+  background-color: $uiBgColor !important;
+  height: 100%;
+  font-family: "Numans", sans-serif;
+}
+
+.ui-nav-link {
+  @extend .nav-link;
+  color: #a1a1a1 !important;
+  height: 100%;
+  &:hover {
+    color: #cccccc !important;
+  }
+}

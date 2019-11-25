@@ -1,20 +1,19 @@
-import { ApiResponse, CurrentUser, AuthParams } from "./../Common/types";
+import { ApiResponse } from "./../Common/types";
 import { unwrap } from "../Common/serviceUtility";
 import axios from "axios";
+import { AuthParams, CurrentUser } from "./authTypes";
 
 class AuthService {
   SignIn(params?: AuthParams) {
-    return axios.post("Auth/Authenticate", params);
+    return axios.post("api/Auth/Authenticate", params);
   }
 
   SignOut() {
-    return axios.get("Auth/Deauthenticate");
+    return axios.get("api/Auth/Deauthenticate");
   }
 
   GetCurrentUser() {
-    return axios
-      .get<ApiResponse<CurrentUser>>("Auth/GetCurrentUser")
-      .then(unwrap);
+    return axios.get<ApiResponse<CurrentUser>>("api/Auth/GetCurrentUser").then(unwrap);
   }
 }
 

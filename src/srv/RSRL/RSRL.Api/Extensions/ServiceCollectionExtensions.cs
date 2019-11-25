@@ -59,6 +59,7 @@ namespace RSRL.Api.Extensions
                                     .Select(c => c.Value);
                                 if (!(claimRoles.Except(user.Roles).Count() == 0 && user.Roles.Except(claimRoles).Count() == 0))
                                 {
+                                    await context.HttpContext.SignOutAsync();
                                     context.RejectPrincipal();
                                 }
                             }

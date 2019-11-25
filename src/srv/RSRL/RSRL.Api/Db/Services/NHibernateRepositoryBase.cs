@@ -53,7 +53,7 @@ namespace RSRL.Api.Db.Services
 
         public async Task UpdateAsync(TEntity entity)
         {
-            await session.UpdateAsync(entity);
+            await session.MergeAsync(entity);
         }
     }
 }
