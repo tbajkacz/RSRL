@@ -1,8 +1,7 @@
 import React from "react";
 import "./styles/App.scss";
 import { Login } from "./Auth/Login";
-import { Route, Link, Switch, Router } from "react-router-dom";
-import { createBrowserHistory } from "history";
+import { Route, Link, Switch, Router, HashRouter } from "react-router-dom";
 import UserMenu from "./Auth/UserMenu";
 import { ProvideAuth } from "./Auth/authContext";
 import routes from "./Common/Routes";
@@ -12,12 +11,10 @@ import { Navbar, Nav, NavbarBrand, NavItem } from "reactstrap";
 import UserAccountList from "./Users/UserAccountList";
 import RemoteLockList from "./RemoteLocks/RemoteLockList";
 
-const history = createBrowserHistory();
-
 function App() {
   return (
     <ProvideAuth>
-      <Router history={history}>
+      <HashRouter>
         <Navbar className="ui-element-bg-dark shadow">
           <NavbarBrand>
             <Link className="navbar-brand text-light mr-0" to={routes.Home}>
@@ -62,7 +59,7 @@ function App() {
             </Route>
           </Switch>
         </div>
-      </Router>
+      </HashRouter>
     </ProvideAuth>
   );
 }
