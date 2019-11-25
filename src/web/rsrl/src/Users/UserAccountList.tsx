@@ -72,9 +72,6 @@ export default function UserAccountList(props: UserAccountListProps) {
           break;
         case UserAccountOperation.Edit:
           userHelpers.requestUpdate(data, onRequestCompleted);
-          if (currentUser && currentUser.login === data.login) {
-            signOut();
-          }
           break;
         case UserAccountOperation.ChangePassword:
           userHelpers.requestChangePassword(data, onRequestCompleted);
