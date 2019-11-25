@@ -2,7 +2,8 @@ const routes = {
   Home: "/home",
   Login: "/login",
   AccessCards: "/accessCards",
-  UserAccounts: "/userAccounts"
+  UserAccounts: "/userAccounts",
+  RemoteLocks: "/remoteLocks"
 };
 
 export default routes;
