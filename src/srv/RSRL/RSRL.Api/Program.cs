@@ -18,7 +18,8 @@ namespace RSRL.Api
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.TryUseKestrelWithProvidedIPv4Url(args)
+                        .UseStartup<Startup>();
                 });
     }
 }
