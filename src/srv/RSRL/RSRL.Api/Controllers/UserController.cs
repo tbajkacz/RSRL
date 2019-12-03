@@ -8,7 +8,6 @@ using RSRL.Api.Users.Models;
 using RSRL.Api.Users.Params;
 using RSRL.Api.Users.Services;
 using RSRL.Api.Utility;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,13 +19,13 @@ namespace RSRL.Api.Controllers
     [Authorize(Policy = Policies.Admin)]
     public class UserController : ControllerBase
     {
-        private readonly IUserRepository userSession;
+        private readonly IUserRepository userRepository;
         private readonly IUnitOfWork uow;
         private readonly IMapper mapper;
 
         public UserController(IUserRepository userSession, IUnitOfWork uow, IMapper mapper)
         {
-            this.userSession = userSession;
+            this.userRepository = userSession;
             this.uow = uow;
             this.mapper = mapper;
         }
@@ -34,7 +33,7 @@ namespace RSRL.Api.Controllers
         [HttpGet]
         public IEnumerable<UserAccountDto> GetUsers()
         {
-            return userSession.Get()
+            return userRepository.Get()
                 .Select(u => mapper.Map<UserAccount, UserAccountDto>(u));
         }
 
@@ -43,7 +42,7 @@ namespace RSRL.Api.Controllers
         {
             var user = mapper.Map<UserAccountAddParams, UserAccount>(param);
 
-            await userSession.AddAsync(user);
+            await userRepository.AddAsync(user);
             await uow.CommitAsync();
         }
 
@@ -52,14 +51,21 @@ namespace RSRL.Api.Controllers
         {
             var user = mapper.Map<UserAccountUpdateParams, UserAccount>(param);
 
-            await userSession.UpdateAsync(user);
+            await userRepository.UpdateAsync(user);
             await uow.CommitAsync();
         }
 
         [HttpPost]
         public async Task UpdatePassword(UserUpdatePasswordParams param)
         {
-            await userSession.UpdatePasswordAsync(param);
+            await userRepository.UpdatePasswordAsync(param);
+            await uow.CommitAsync();
+        }
+
+        [HttpPost]
+        public async Task Remove(UserRemoveParams param)
+        {
+            await userRepository.DeleteAsync(param.Id);
             await uow.CommitAsync();
         }
         
