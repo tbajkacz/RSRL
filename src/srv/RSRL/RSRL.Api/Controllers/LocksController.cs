@@ -60,6 +60,13 @@ namespace RSRL.Api.Controllers
         }
 
         [HttpPost]
+        public async Task Remove(RemoteLockRemoveParams param)
+        {
+            await lockRepository.DeleteAsync(param.Id);
+            await uow.CommitAsync();
+        }
+
+        [HttpPost]
         public async Task Unlock(UnlockParams param)
         {
             var remoteLock = await lockRepository.GetByIdAsync(param.LockId);
