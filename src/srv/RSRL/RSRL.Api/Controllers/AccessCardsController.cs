@@ -16,7 +16,7 @@ namespace RSRL.Api.Controllers
 {
     [ApiController]
     [DefaultRoute]
-    [Authorize(Policy = Policies.Admin)]
+    [Authorize(Policy = Policies.AtLeastLockManager)]
     public class AccessCardsController : ControllerBase
     {
         private readonly IAccessCardRepository accessCardRepository;

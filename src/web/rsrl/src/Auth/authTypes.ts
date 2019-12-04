@@ -1,5 +1,6 @@
 export interface CurrentUser {
   login: string;
+  roles: string[];
 }
 
 export interface AuthParams {

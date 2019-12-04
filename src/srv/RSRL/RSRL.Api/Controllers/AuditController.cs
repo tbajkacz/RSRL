@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RSRL.Api.Audit.Dto;
 using RSRL.Api.Audit.Models;
 using RSRL.Api.Audit.Params;
 using RSRL.Api.Audit.Services;
+using RSRL.Api.Auth.Constants;
 using RSRL.Api.Db.Services;
 using RSRL.Api.Locks.Services;
 using RSRL.Api.Utility;
@@ -33,6 +35,7 @@ namespace RSRL.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = Policies.AtLeastLogManager)]
         public IEnumerable<ActionLogDto> GetLogs()
         {
             return actionLogger.GetLogs()

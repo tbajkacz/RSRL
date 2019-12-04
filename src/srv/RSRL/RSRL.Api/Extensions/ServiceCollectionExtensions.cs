@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using NHibernate.Criterion;
 using NHibernate.Tool.hbm2ddl;
 using RSRL.Api.AccessCards.Services;
 using RSRL.Api.Auth.Constants;
@@ -85,6 +86,14 @@ namespace RSRL.Api.Extensions
             => services.AddAuthorization(cfg =>
             {
                 cfg.AddPolicy(Policies.Admin, p => p.RequireRole(Roles.Admin));
+                cfg.AddPolicy(Policies.AtLeastLockManager,
+                              p => p.RequireAssertion(ctx => ctx.User.IsInRole(Roles.LockManager) ||
+                                                             ctx.User.IsInRole(Roles.Admin)
+                ));
+                cfg.AddPolicy(Policies.AtLeastLogManager,
+                              p => p.RequireAssertion(ctx => ctx.User.IsInRole(Roles.LogManager) ||
+                                                             ctx.User.IsInRole(Roles.Admin)
+                ));
             });
     }
 }

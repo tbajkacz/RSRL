@@ -8,7 +8,7 @@ namespace RSRL.Api.Auth.Constants
     {
         public const string Admin = "admin";
 
-        public const string CardManager = "cardManager";
+        public const string LockManager = "lockManager";
 
         public const string LogManager = "logManager";
 

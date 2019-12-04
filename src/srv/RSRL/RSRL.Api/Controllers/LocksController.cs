@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RSRL.Api.Audit.Models;
 using RSRL.Api.Audit.Services;
+using RSRL.Api.Auth.Constants;
 using RSRL.Api.Db.Services;
 using RSRL.Api.Extensions;
 using RSRL.Api.Locks.Dto;
@@ -18,6 +20,7 @@ namespace RSRL.Api.Controllers
 {
     [ApiController]
     [DefaultRoute]
+    [Authorize(Policy = Policies.AtLeastLockManager)]
     public class LocksController : ControllerBase
     {
         private readonly ILockHttpService lockHttpService;
