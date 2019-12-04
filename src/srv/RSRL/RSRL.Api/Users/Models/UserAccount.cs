@@ -1,4 +1,5 @@
-﻿using RSRL.Api.Db.Models;
+﻿using RSRL.Api.AccessCards.Models;
+using RSRL.Api.Db.Models;
 using RSRL.Api.Exceptions;
 using RSRL.Api.Utility;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ namespace RSRL.Api.Users.Models
 
         public virtual string PasswordHash { get; set; }
 
+        public virtual IList<AccessCard> AccessCards { get; set; }
+
         public virtual IList<string> Roles { get; set; } = new List<string>();
     }
 
@@ -48,6 +51,8 @@ namespace RSRL.Api.Users.Models
                 .Unique();
             Map(x => x.PasswordHash)
                 .Not.Nullable();
+            HasMany(x => x.AccessCards)
+                .Inverse();
             HasMany(x => x.Roles)
                 .Table("Roles")
                 .Element("Role");
