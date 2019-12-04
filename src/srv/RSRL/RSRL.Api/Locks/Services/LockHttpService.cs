@@ -28,18 +28,18 @@ namespace RSRL.Api.Locks.Services
                 Encoding.UTF8,
                 "application/json");
 
-            await httpClient.PostAsync(
-                Path.Combine(remoteLock.Url, "toggleBlock"),
-                content);
+            var url = Path.Combine(remoteLock.Url, "toggleBlock").Replace(@"\", @"/");
+
+            await httpClient.PostAsync(url, content);
         }
 
         public async Task UnlockAsync(int lockId)
         {
             var remoteLock = await lockRepository.GetByIdAsync(lockId);
 
-            await httpClient.PostAsync(
-                Path.Combine(remoteLock.Url, "unlock"),
-                null);
+            var url = Path.Combine(remoteLock.Url, "unlock").Replace(@"\", @"/");
+
+            await httpClient.PostAsync(url, null);
         }
 
         public void Dispose()
