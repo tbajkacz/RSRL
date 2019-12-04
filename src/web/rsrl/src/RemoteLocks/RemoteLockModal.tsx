@@ -5,6 +5,7 @@ import useForm from "react-hook-form";
 import { FormInputConfig, FormInput } from "../Common/FormInput";
 import { RemoteLockModalData, RemoteLockOperation, RemoteLock, AccessCardSelectModel } from "./remoteLockTypes";
 import Select, { ValueType } from "react-select";
+import { formatUserInfo } from "../Common/formatting";
 
 interface RemoteLockModalProps {
   operation: RemoteLockOperation;
@@ -78,7 +79,9 @@ export default function RemoteLockModal(props: RemoteLockModalProps) {
     return props.accessCards
       ? props.accessCards.map(r => ({
           value: r.id,
-          label: `${r.id}, owner: ${r.ownerLogin ? r.ownerLogin : "-"}`
+          label: `${r.id}, owner: ${
+            r.ownerLogin ? formatUserInfo({ name: r.ownerName, login: r.ownerLogin, surname: r.ownerSurname }) : "-"
+          }`
         }))
       : undefined;
   };
@@ -88,7 +91,14 @@ export default function RemoteLockModal(props: RemoteLockModalProps) {
       if (props.accessCards) {
         let found = props.accessCards.find(c => c.id === r);
         if (found) {
-          return { value: r, label: `${r}, owner: ${found.ownerLogin ? found.ownerLogin : "-"}` };
+          return {
+            value: r,
+            label: `${r}, owner: ${
+              found.ownerLogin
+                ? formatUserInfo({ name: found.ownerName, login: found.ownerLogin, surname: found.ownerSurname })
+                : "-"
+            }`
+          };
         }
       }
       return { value: "ERROR", label: "ERROR" };

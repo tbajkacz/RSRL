@@ -5,6 +5,7 @@ import { AccessCardModalData, AccessCard, AccessCardOperation } from "./accessCa
 import { useState, useEffect } from "react";
 import useForm from "react-hook-form";
 import { FormInputConfig, FormInput } from "../Common/FormInput";
+import { formatUserInfo } from "../Common/formatting";
 
 interface AccessCardModalProps {
   operation: AccessCardOperation;
@@ -40,7 +41,11 @@ export default function AccessCardModal(props: AccessCardModalProps) {
 
   const renderUserOptions = () => {
     if (props.userInfos) {
-      return props.userInfos.map(u => <option selected={modalData.ownerLogin === u.login}>{u.login}</option>);
+      return props.userInfos.map(u => (
+        <option selected={modalData.ownerLogin === u.login} label={u.login}>
+          {formatUserInfo(u)}
+        </option>
+      ));
     }
   };
 
@@ -51,7 +56,7 @@ export default function AccessCardModal(props: AccessCardModalProps) {
   const onSelectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     let copy = { ...modalData! };
     if (props.userInfos) {
-      copy.ownerLogin = e.currentTarget.selectedOptions[0].value;
+      copy.ownerLogin = e.currentTarget.selectedOptions[0].label;
       setModalData(copy);
     }
   };

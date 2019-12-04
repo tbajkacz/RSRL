@@ -1,5 +1,6 @@
 import { AccessCardModalData } from "./accessCardTypes";
 import { accessCardsService } from "./AccessCardsService";
+import { UserAccountSelectOptionModel } from "../Users/userTypes";
 
 class AccessCardHelpers {
   requestAdd(accessCardModalData: AccessCardModalData, userId: number, onRequestCompleted: () => void) {

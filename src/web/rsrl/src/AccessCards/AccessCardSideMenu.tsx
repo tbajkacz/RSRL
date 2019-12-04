@@ -32,7 +32,7 @@ export default function AccessCardSideMenu(props: AccessCardSideMenuProps) {
   ];
 
   return (
-    <div className="ui-list-wrapper ui-side-list-wrapper col-sm-1">
+    <div className="ui-list-wrapper ui-side-list-wrapper">
       <ul className="ui-list-dark">{sideMenuElements}</ul>
     </div>
   );

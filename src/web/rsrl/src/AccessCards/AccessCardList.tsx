@@ -41,7 +41,9 @@ export default function AccessCardList(props: AccessCardListProps) {
         response.result.map(u => {
           return {
             id: u.id,
-            login: u.login
+            login: u.login,
+            name: u.name,
+            surname: u.surname
           };
         })
       );

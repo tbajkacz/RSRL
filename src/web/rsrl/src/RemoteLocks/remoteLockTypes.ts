@@ -43,6 +43,8 @@ export interface RemoteLockModalData {
 export interface AccessCardSelectModel {
   id: string;
   ownerLogin: string;
+  ownerName: string;
+  ownerSurname: string;
 }
 
 export enum RemoteLockOperation {
@@ -50,6 +52,7 @@ export enum RemoteLockOperation {
   Add,
   Edit,
   Remove,
-  ToggleBlock,
+  Block,
+  Unblock,
   Unlock
 }

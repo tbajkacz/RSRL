@@ -1,5 +1,6 @@
 import * as React from "react";
 import { AccessCard } from "./accessCardTypes";
+import { formatUserInfo } from "../Common/formatting";
 
 interface AccessCardItemProps {
   accessCard: AccessCard;
@@ -10,12 +11,12 @@ interface AccessCardItemProps {
 export default function AccessCardItem(props: AccessCardItemProps) {
   let itemClass = props.isSelected ? "ui-list-item-dark ui-selected" : "ui-list-item-dark";
 
-  let ownerLogin = props.accessCard.owner ? props.accessCard.owner.login : "unowned";
+  let ownerInfo = props.accessCard.owner ? formatUserInfo(props.accessCard.owner) : "unowned";
 
   return (
     <li onClick={() => props.onClick(props.accessCard)} className={itemClass}>
       <div>Card id: {props.accessCard.id}</div>
-      <div>Owner: {ownerLogin}</div>
+      <div>Owner: {ownerInfo}</div>
     </li>
   );
 }

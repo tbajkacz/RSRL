@@ -32,6 +32,8 @@ export interface UserAccountRemoveParams {
 export interface UserAccountSelectOptionModel {
   id: number;
   login: string;
+  name: string;
+  surname: string;
 }
 
 export interface UserAccountUpdatePasswordParams {
