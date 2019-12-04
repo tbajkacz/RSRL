@@ -3,7 +3,8 @@ const routes = {
   Login: "/login",
   AccessCards: "/accessCards",
   UserAccounts: "/userAccounts",
-  RemoteLocks: "/remoteLocks"
+  RemoteLocks: "/remoteLocks",
+  Audit: "/audit"
 };
 
 export default routes;
