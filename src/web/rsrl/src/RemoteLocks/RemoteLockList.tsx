@@ -38,7 +38,9 @@ export default function RemoteLockList(props: RemoteLockListProps) {
     promise.then(response => {
       let mapped = response.result.map(c => ({
         id: c.id,
-        ownerLogin: c.owner.login
+        ownerLogin: c.owner.login,
+        ownerName: c.owner.name,
+        ownerSurname: c.owner.surname
       }));
       setAccessCardsInfos(mapped);
     });
@@ -54,6 +56,15 @@ export default function RemoteLockList(props: RemoteLockListProps) {
         break;
       case RemoteLockOperation.Remove:
         remoteLockHelpers.requestRemove(selected!.id, onRequestCompleted);
+        break;
+      case RemoteLockOperation.Block:
+        remoteLockHelpers.requestToggleBlock(selected!.id, true, onRequestCompleted);
+        break;
+      case RemoteLockOperation.Unblock:
+        remoteLockHelpers.requestToggleBlock(selected!.id, false, onRequestCompleted);
+        break;
+      case RemoteLockOperation.Unlock:
+        remoteLockHelpers.requestUnlock(selected!.id, onRequestCompleted);
         break;
       default:
         break;

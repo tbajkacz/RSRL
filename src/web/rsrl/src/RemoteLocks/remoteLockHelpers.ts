@@ -26,6 +26,14 @@ class RemoteLockHelpers {
   requestRemove(id: number, onRequestCompleted: () => void) {
     remoteLockService.Delete({ id }).then(onRequestCompleted);
   }
+
+  requestToggleBlock(id: number, targetState: boolean, onRequestCompleted: () => void) {
+    remoteLockService.ToggleBlock({ lockId: id, targetState }).then(onRequestCompleted);
+  }
+
+  requestUnlock(id: number, onRequestCompleted: () => void) {
+    remoteLockService.Unlock({ lockId: id }).then(onRequestCompleted);
+  }
 }
 
 export const remoteLockHelpers = new RemoteLockHelpers();

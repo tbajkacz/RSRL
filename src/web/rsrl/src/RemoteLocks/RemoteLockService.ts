@@ -23,7 +23,7 @@ class RemoteLockService {
   }
 
   Delete(param: RemoteLockDeleteParams) {
-    return axios.post<ApiResponse<any>>("api/Locks/Delete", param).then(unwrap);
+    return axios.post<ApiResponse<any>>("api/Locks/Remove", param).then(unwrap);
   }
 
   ToggleBlock(param: RemoteLockToggleBlockParams) {
