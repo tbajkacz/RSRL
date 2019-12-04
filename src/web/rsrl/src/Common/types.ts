@@ -4,3 +4,9 @@ export interface ApiResponse<T> {
   isError: boolean;
   result: T;
 }
+
+export interface FormatUserInfoArgs {
+  login: string;
+  name: string;
+  surname: string;
+}
