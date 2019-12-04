@@ -1,7 +1,6 @@
 ﻿using NHibernate;
 using RSRL.Api.Db.Models;
 using RSRL.Api.Exceptions;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -16,42 +15,42 @@ namespace RSRL.Api.Db.Services
             this.session = session;
         }
 
-        public async Task AddAsync(TEntity entity)
+        public virtual async Task AddAsync(TEntity entity)
         {
             await session.SaveAsync(entity);
         }
 
-        public async Task DeleteAsync(TId id)
+        public virtual async Task DeleteAsync(TId id)
         {
             await session.DeleteAsync(await session.GetAsync<TEntity>(id));
         }
 
-        public IEnumerable<TEntity> Get()
+        public virtual IEnumerable<TEntity> Get()
         {
             return session.Query<TEntity>();
         }
 
-        public TEntity GetById(TId id)
+        public virtual TEntity GetById(TId id)
         {
             return session.Get<TEntity>(id) ?? throw new EntityNotFoundException(typeof(TEntity), id);
         }
 
-        public async Task<TEntity> GetByIdAsync(TId id)
+        public virtual async Task<TEntity> GetByIdAsync(TId id)
         {
             return await session.GetAsync<TEntity>(id) ?? throw new EntityNotFoundException(typeof(TEntity), id);
         }
 
-        public TEntity GetByIdOrDefault(TId id)
+        public virtual TEntity GetByIdOrDefault(TId id)
         {
             return session.Get<TEntity>(id);
         }
 
-        public async Task<TEntity> GetByIdOrDefaultAsync(TId id)
+        public virtual async Task<TEntity> GetByIdOrDefaultAsync(TId id)
         {
             return await session.GetAsync<TEntity>(id);
         }
 
-        public async Task UpdateAsync(TEntity entity)
+        public virtual async Task UpdateAsync(TEntity entity)
         {
             await session.MergeAsync(entity);
         }

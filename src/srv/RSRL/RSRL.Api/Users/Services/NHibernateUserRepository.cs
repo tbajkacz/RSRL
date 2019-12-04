@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using NHibernate;
 using NHibernate.Linq;
 using RSRL.Api.Auth.Params;
@@ -32,6 +33,14 @@ namespace RSRL.Api.Users.Services
                 .SingleOrDefaultAsync(u => u.Login == param.Login);
 
             return user == null ? null : hashService.CompareHashes(param.Password, user.PasswordHash) ? user : null;
+        }
+
+        public override async Task DeleteAsync(int id)
+        {
+            var user = await GetByIdAsync(id);
+            user.AccessCards.AsParallel()
+                .ForAll(c => c.Owner = null);
+            await base.DeleteAsync(id);
         }
     }
 }
