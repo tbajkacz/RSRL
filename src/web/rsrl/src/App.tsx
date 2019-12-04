@@ -10,6 +10,7 @@ import AccessCardList from "./AccessCards/AccessCardList";
 import { Navbar, Nav, NavbarBrand, NavItem } from "reactstrap";
 import UserAccountList from "./Users/UserAccountList";
 import RemoteLockList from "./RemoteLocks/RemoteLockList";
+import ActionLogList from "./Audit/ActionLogList";
 
 function App() {
   return (
@@ -37,6 +38,11 @@ function App() {
                 Remote locks
               </Link>
             </NavItem>
+            <NavItem>
+              <Link className="ui-nav-link" to={routes.Audit}>
+                Logs
+              </Link>
+            </NavItem>
           </Nav>
           <UserMenu />
         </Navbar>
@@ -56,6 +62,9 @@ function App() {
             </Route>
             <Route path={routes.RemoteLocks}>
               <RemoteLockList />
+            </Route>
+            <Route path={routes.Audit}>
+              <ActionLogList />
             </Route>
           </Switch>
         </div>
