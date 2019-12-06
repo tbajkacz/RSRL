@@ -16,7 +16,6 @@ namespace RSRL.Api.Controllers
 {
     [ApiController]
     [DefaultRoute]
-    [Authorize(Policy = Policies.Admin)]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository userRepository;
@@ -31,13 +30,23 @@ namespace RSRL.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = Policies.Admin)]
         public IEnumerable<UserAccountDto> GetUsers()
         {
             return userRepository.Get()
                 .Select(u => mapper.Map<UserAccount, UserAccountDto>(u));
         }
 
+        [HttpGet]
+        [Authorize(Policy = Policies.AtLeastLockManager)]
+        public IEnumerable<UserAccountInfoDto> GetUsersInfos()
+        {
+            return userRepository.Get()
+                .Select(u => mapper.Map<UserAccount, UserAccountInfoDto>(u));
+        }
+
         [HttpPost]
+        [Authorize(Policy = Policies.Admin)]
         public async Task Add(UserAccountAddParams param)
         {
             var user = mapper.Map<UserAccountAddParams, UserAccount>(param);
@@ -47,6 +56,7 @@ namespace RSRL.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = Policies.Admin)]
         public async Task Update(UserAccountUpdateParams param)
         {
             var user = mapper.Map<UserAccountUpdateParams, UserAccount>(param);
@@ -56,6 +66,7 @@ namespace RSRL.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = Policies.Admin)]
         public async Task UpdatePassword(UserUpdatePasswordParams param)
         {
             await userRepository.UpdatePasswordAsync(param);
@@ -63,6 +74,7 @@ namespace RSRL.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = Policies.Admin)]
         public async Task Remove(UserRemoveParams param)
         {
             await userRepository.DeleteAsync(param.Id);

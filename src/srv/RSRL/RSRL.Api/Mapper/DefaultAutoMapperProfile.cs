@@ -19,6 +19,7 @@ namespace RSRL.Api.Mapper
         public DefaultAutoMapperProfile()
         {
             CreateMap<UserAccount, UserAccountDto>();
+            CreateMap<UserAccount, UserAccountInfoDto>();
             CreateMap<UserAccountAddParams, UserAccount>()
                 .ForMember(u => u.PasswordHash, mce => mce.MapFrom<UserAccountAddPasswordHashResolver>());
             CreateMap<UserAccountUpdateParams, UserAccount>()
