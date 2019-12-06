@@ -5,6 +5,8 @@ namespace RSRL.Api.Audit.Dto
 {
     public class ActionLogDto
     {
+        public int Id { get; set; }
+
         public UserAccountDto Executor { get; set; }
 
         public string Description { get; set; }
