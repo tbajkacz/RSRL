@@ -25,7 +25,7 @@ export function Login(props: LoginProps) {
     <Redirect to={routes.Home} />
   ) : (
     <div className={props.className}>
-      <Card className="col-md-3 ui-login-card shadow">
+      <div className="ui-login-card shadow">
         <CardHeader>
           <h3 className="text-white">Sign In</h3>
         </CardHeader>
@@ -71,7 +71,7 @@ export function Login(props: LoginProps) {
             Don't have an account? <a href="mailto:tomasz.bajkacz@gmail.com">Contact</a> your administrator
           </small>
         </CardFooter>
-      </Card>
+      </div>
     </div>
   );
 }

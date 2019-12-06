@@ -2,10 +2,21 @@
 @import "../../Common/styles/Variables.scss";
 
 .ui-login-card {
-  @extend .rounded-0;
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-  background-color: $uiElementBasicBgColor !important;
+  @extend .col-sm-12;
+  @extend .card;
+  max-width: 400px;
+  padding-left: 0px;
+  padding-right: 0px;
+  background-color: $uiElementBasicBgColor;
+
+  input {
+    background-color: $uiElementBorderColor;
+    border: 0;
+    &:focus {
+      background-color: $uiElementBorderColor;
+      color: white;
+    }
+  }
 }
 
 .ui-input-icon {
@@ -14,6 +25,8 @@
   background-color: $primaryColor;
   color: black;
   border: 0 !important;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 .ui-login-remember-me {
