@@ -30,7 +30,9 @@ export default function ActionLogList(props: ActionLogListProps) {
                 <h6 className="ui-list-header">Action logs</h6>
                 <ul className="ui-list-dark">
                   {logs.map(c => (
-                    <li className="ui-list-item-dark">{c.description + " by " + formatUserInfo(c.executor)}</li>
+                    <li key={c.id} className="ui-list-item-dark">
+                      {c.description + " by " + formatUserInfo(c.executor)}
+                    </li>
                   ))}
                 </ul>
               </div>

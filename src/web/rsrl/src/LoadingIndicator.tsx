@@ -22,7 +22,6 @@ export default function LoadingIndicator(props: LoadingIndicatorProps) {
         <FontAwesomeIcon icon={faSpinner} spin={true} color="white" size="2x" />
       </div>
     );
-    console.log(props.asModal);
     if (props.asModal) {
       return (
         <Modal className="ui-bg-transparent" isOpen={!isCompleted}>

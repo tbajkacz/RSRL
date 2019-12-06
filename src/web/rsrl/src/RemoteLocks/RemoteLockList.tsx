@@ -99,7 +99,12 @@ export default function RemoteLockList(props: RemoteLockListProps) {
                 <h6 className="ui-list-header">Remote locks</h6>
                 <ul className="ui-list-dark">
                   {remoteLocks.map(c => (
-                    <RemoteLockItem remoteLock={c} onClick={c => setSelected(c)} isSelected={c === selected} />
+                    <RemoteLockItem
+                      key={c.id}
+                      remoteLock={c}
+                      onClick={c => setSelected(c)}
+                      isSelected={c === selected}
+                    />
                   ))}
                 </ul>
               </div>

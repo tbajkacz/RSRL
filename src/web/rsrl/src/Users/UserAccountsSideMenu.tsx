@@ -18,6 +18,7 @@ export default function UserAccountsSideMenu(props: UserAccountsSideMenuProps) {
   const sideMenuElement = (option: number, icon: IconDefinition, disabled: boolean) => {
     return (
       <li
+        key={option}
         className={combineClasses("ui-side-list-item-dark", disabled ? "ui-disabled" : "")}
         onClick={disabled ? undefined : () => props.onClick(option as UserAccountOperation)}
       >

@@ -1,5 +1,4 @@
 import React, { useState, FormEvent } from "react";
-import { combineClasses } from "../Common/ComponentUtility";
 import { useAuth } from "./authContext";
 import { Redirect } from "react-router";
 import routes from "../Common/Routes";

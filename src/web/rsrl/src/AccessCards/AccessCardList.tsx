@@ -99,7 +99,12 @@ export default function AccessCardList(props: AccessCardListProps) {
                 <h6 className="ui-list-header">Access Cards</h6>
                 <ul className="ui-list-dark">
                   {accessCards.map(c => (
-                    <AccessCardItem accessCard={c} onClick={c => setSelected(c)} isSelected={c === selected} />
+                    <AccessCardItem
+                      key={c.id}
+                      accessCard={c}
+                      onClick={c => setSelected(c)}
+                      isSelected={c === selected}
+                    />
                   ))}
                 </ul>
               </div>

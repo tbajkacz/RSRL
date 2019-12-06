@@ -8,7 +8,7 @@ interface UserAccountItemProps {
   isSelected: boolean;
 }
 
-export default function UserAccountItem(props: UserAccountItemProps) {
+export default React.memo(function UserAccountItem(props: UserAccountItemProps) {
   let itemClass = props.isSelected ? "ui-list-item-dark ui-selected" : "ui-list-item-dark";
 
   return (
@@ -17,4 +17,4 @@ export default function UserAccountItem(props: UserAccountItemProps) {
       <div className="small">{"Roles: " + props.userAccount.roles.join(", ")}</div>
     </li>
   );
-}
+});

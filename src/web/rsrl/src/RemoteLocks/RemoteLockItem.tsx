@@ -7,7 +7,7 @@ interface RemoteLockItemProps {
   onClick: (card: RemoteLock) => void;
 }
 
-export default function RemoteLockItem(props: RemoteLockItemProps) {
+export default React.memo(function RemoteLockItem(props: RemoteLockItemProps) {
   let itemClass = props.isSelected ? "ui-list-item-dark ui-selected" : "ui-list-item-dark";
 
   return (
@@ -16,4 +16,4 @@ export default function RemoteLockItem(props: RemoteLockItemProps) {
       <div className="small">{"Url: " + props.remoteLock.url}</div>
     </li>
   );
-}
+});

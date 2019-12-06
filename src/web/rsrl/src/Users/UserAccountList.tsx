@@ -7,7 +7,6 @@ import UserAccountsSideMenu from "./UserAccountsSideMenu";
 import UserAccountItem from "./UserAcountItem";
 import UserAccountModal from "./UserAccountModal";
 import { userHelpers } from "./userAccountListHelpers";
-import { useAuth } from "../Auth/authContext";
 
 interface UserAccountListProps {
   className?: string;
@@ -24,7 +23,6 @@ export default function UserAccountList(props: UserAccountListProps) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const [dataChanged, setDataChanged] = useState(false);
-  const { currentUser, signOut } = useAuth();
 
   const toggle = () => setModalIsOpen(!modalIsOpen);
 
@@ -91,7 +89,12 @@ export default function UserAccountList(props: UserAccountListProps) {
                 <h6 className="ui-list-header">Users</h6>
                 <ul className="ui-list-dark">
                   {userAccounts.map(c => (
-                    <UserAccountItem userAccount={c} onClick={c => setSelected(c)} isSelected={c === selected} />
+                    <UserAccountItem
+                      key={c.id}
+                      userAccount={c}
+                      onClick={c => setSelected(c)}
+                      isSelected={c === selected}
+                    />
                   ))}
                 </ul>
               </div>

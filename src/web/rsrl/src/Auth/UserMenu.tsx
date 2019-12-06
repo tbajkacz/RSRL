@@ -9,7 +9,7 @@ export default React.memo(function UserMenu() {
 
   return auth.currentUser ? (
     <div className="text-light">
-      <text className="mr-2">Logged in as {auth.currentUser.login}</text>
+      <p className="mr-2">Logged in as {auth.currentUser.login}</p>
       <SignInOutButton onClick={() => auth.signOut()}>Sign out</SignInOutButton>
     </div>
   ) : (

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { UserAccountOperation, UserAccount, UserAccountModalData } from "./userTypes";
-import { AccessCardOperation } from "../AccessCards/accessCardTypes";
 import { Modal, ModalHeader, ModalBody, Form, FormGroup, Input, ModalFooter, Button } from "reactstrap";
 import useForm from "react-hook-form";
 import { FormInput, FormInputConfig } from "../Common/FormInput";

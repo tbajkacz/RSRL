@@ -8,7 +8,7 @@ interface AccessCardItemProps {
   onClick: (card: AccessCard) => void;
 }
 
-export default function AccessCardItem(props: AccessCardItemProps) {
+export default React.memo(function AccessCardItem(props: AccessCardItemProps) {
   let itemClass = props.isSelected ? "ui-list-item-dark ui-selected" : "ui-list-item-dark";
 
   let ownerInfo = props.accessCard.owner ? formatUserInfo(props.accessCard.owner) : "unowned";
@@ -19,4 +19,4 @@ export default function AccessCardItem(props: AccessCardItemProps) {
       <div>Owner: {ownerInfo}</div>
     </li>
   );
-}
+});

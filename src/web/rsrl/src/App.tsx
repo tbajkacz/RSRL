@@ -19,11 +19,11 @@ function App() {
     <ProvideAuth>
       <HashRouter>
         <Navbar className="ui-element-bg-dark shadow">
-          <NavbarBrand>
+          <div className="navbar-brand">
             <Link className="navbar-brand text-light mr-0" to={routes.Home}>
               RSRLC
             </Link>
-          </NavbarBrand>
+          </div>
           <Nav className="mr-auto">
             <Restricted roles={[roles.admin]}>
               <NavItem>
