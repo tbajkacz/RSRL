@@ -51,6 +51,14 @@ export interface UserAccountModalData {
   roles: string[];
 }
 
+export interface UserAccountInfo {
+  id: number;
+  login: string;
+  name: string;
+  surname: string;
+  roles: string[];
+}
+
 export enum UserAccountOperation {
   None,
   Add,

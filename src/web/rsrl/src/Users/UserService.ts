@@ -4,7 +4,8 @@ import {
   UserAccountAddParams,
   UserAccountUpdateParams,
   UserAccountRemoveParams,
-  UserAccountUpdatePasswordParams
+  UserAccountUpdatePasswordParams,
+  UserAccountInfo
 } from "./userTypes";
 import { ApiResponse } from "../Common/types";
 import { unwrap } from "../Common/serviceUtility";
@@ -12,6 +13,10 @@ import { unwrap } from "../Common/serviceUtility";
 class UserService {
   Get() {
     return axios.get<ApiResponse<UserAccount[]>>("api/User/GetUsers").then(unwrap);
+  }
+
+  GetInfos() {
+    return axios.get<ApiResponse<UserAccountInfo[]>>("api/User/GetUsersInfos").then(unwrap);
   }
 
   Add(param: UserAccountAddParams) {
