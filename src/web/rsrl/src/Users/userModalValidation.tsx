@@ -14,5 +14,5 @@ export function isPeselValid(pesel: string): boolean {
   }
   let mod = sum % 10;
 
-  return 10 - mod === digits[10] || digits[10] === mod;
+  return mod === 0 ? digits[10] === mod : 10 - mod === digits[10];
 }
