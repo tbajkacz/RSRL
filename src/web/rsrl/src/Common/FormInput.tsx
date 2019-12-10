@@ -38,7 +38,7 @@ export function FormInput(props: FormInputProps) {
   };
 
   return (
-    <FormGroup className={combineClasses(props.className)}>
+    <FormGroup className={combineClasses(props.className, isHidden() ? "mb-0" : undefined)}>
       <label className="flex-row ui-input-label" hidden={isHidden()}>
         <small>{props.name.charAt(0).toUpperCase() + props.name.slice(1)}</small>
       </label>

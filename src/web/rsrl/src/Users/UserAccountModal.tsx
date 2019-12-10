@@ -78,6 +78,9 @@ export default function UserAccountModal(props: UserAccountModalProps) {
       case "confirmPassword":
         return props.operation !== UserAccountOperation.ChangePassword && props.operation !== UserAccountOperation.Add;
       case "roles":
+      case "name":
+      case "surname":
+      case "pesel":
         return props.operation !== UserAccountOperation.Edit && props.operation !== UserAccountOperation.Add;
     }
     return false;
