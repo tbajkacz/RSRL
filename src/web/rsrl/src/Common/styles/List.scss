@@ -13,7 +13,7 @@ $listHeight: 500px;
   @extend .shadow-sm;
   @extend .ui-element-bg-dark;
   @extend .p-0;
-  border-radius: 2px;
+  border-radius: $uiElementBorderRadius;
 }
 
 .ui-side-list-wrapper {
@@ -22,6 +22,7 @@ $listHeight: 500px;
   @extend .pt-1;
   @extend .pb-1;
   @extend .mr-1;
+  border-radius: $uiElementBorderRadius;
 }
 
 .ui-list-header {
