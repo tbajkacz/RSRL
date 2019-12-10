@@ -3,9 +3,20 @@ $uiBgColor: #121212;
 $uiElementBasicBgColor: #181818;
 $uiElementActiveBgColor: #323232;
 $uiElementHoverBgColor: #454545;
-$uiElementBorderColor: #212121;
-$uiElementDisabledColor: #aaaaaa;
+$uiElementInputColor: #212121;
+$uiElementDisabledColor: #252525;
+$uiPlaceholderColor: #6c757d;
 $primaryColor: #6200ee;
+
+$uiElementBorderRadius: 3px;
+
+:export {
+  uiElementBasicBgColor: $uiElementBasicBgColor;
+  uiElementInputColor: $uiElementInputColor;
+  uiElementActiveBgColor: $uiElementActiveBgColor;
+  uiElementBorderRadius: $uiElementBorderRadius;
+  uiPlaceholderColor: $uiPlaceholderColor;
+}
 
 //bootstrap theme override
 $primary: #6200ee;

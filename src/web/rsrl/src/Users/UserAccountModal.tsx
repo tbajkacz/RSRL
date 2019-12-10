@@ -5,6 +5,7 @@ import useForm from "react-hook-form";
 import { FormInput, FormInputConfig } from "../Common/FormInput";
 import Select, { ValueType } from "react-select";
 import { isPeselValid } from "./userModalValidation";
+import reactSelectDarkStyle from "../Common/reactSelectStyling";
 
 interface UserAccountModalProps {
   operation: UserAccountOperation;
@@ -119,7 +120,6 @@ export default function UserAccountModal(props: UserAccountModalProps) {
           />
           <FormInput
             config={config}
-            type="number"
             name="pesel"
             defaultValue={modalData.pesel}
             errorMsg="You need to provide a valid pesel"
@@ -143,7 +143,9 @@ export default function UserAccountModal(props: UserAccountModalProps) {
             })}
           />
           <FormGroup hidden={isInputHidden("roles")}>
+            <small className="ui-input-label">Roles</small>
             <Select
+              styles={reactSelectDarkStyle}
               options={props.userRoles ? props.userRoles.map(r => ({ value: r, label: r })) : undefined}
               isMulti={true}
               onChange={onSelectChange}

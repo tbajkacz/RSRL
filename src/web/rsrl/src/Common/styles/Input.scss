@@ -1,0 +1,34 @@
+@import "./Variables.scss";
+@import "../../../node_modules/bootstrap";
+
+.ui-input-dark {
+  @extend .form-control;
+  background-color: $uiElementInputColor;
+  border-radius: $uiElementBorderRadius;
+  border: 0 !important;
+  &:focus {
+    background-color: $uiElementInputColor;
+    color: white;
+    box-shadow: none !important;
+  }
+  &:disabled {
+    background-color: #151515;
+    color: #252525;
+  }
+}
+
+.ui-input-label {
+  color: gray;
+  margin-bottom: 0px;
+}
+
+.ui-input-icon {
+  @extend .input-group-text;
+  width: 38px;
+  background-color: $primaryColor;
+  color: #2b0066;
+  height: 38px;
+  border: 0 !important;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}

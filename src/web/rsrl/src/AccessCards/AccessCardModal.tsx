@@ -96,7 +96,8 @@ export default function AccessCardModal(props: AccessCardModalProps) {
             })}
           />
           <FormGroup>
-            <select className="form-control" onChange={onSelectHandler}>
+            <small className="ui-input-label">Owner</small>
+            <select className="ui-select-dark" onChange={onSelectHandler}>
               <option></option>
               {renderUserOptions()}
             </select>

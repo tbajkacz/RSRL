@@ -6,6 +6,7 @@ import { FormInputConfig, FormInput } from "../Common/FormInput";
 import { RemoteLockModalData, RemoteLockOperation, RemoteLock, AccessCardSelectModel } from "./remoteLockTypes";
 import Select, { ValueType } from "react-select";
 import { formatUserInfo } from "../Common/formatting";
+import reactSelectDarkStyle from "../Common/reactSelectStyling";
 
 interface RemoteLockModalProps {
   operation: RemoteLockOperation;
@@ -144,7 +145,9 @@ export default function RemoteLockModal(props: RemoteLockModalProps) {
             })}
           />
           <FormGroup hidden={isInputHidden("allowedAccessCardIds")}>
+            <small className="ui-input-label">Access cards</small>
             <Select
+              styles={reactSelectDarkStyle}
               options={accessCardsToSelectOptions()}
               isMulti={true}
               defaultValue={allowedAccessCardsToSelectDefaultValue()}

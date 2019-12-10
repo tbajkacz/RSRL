@@ -4,7 +4,10 @@ import "./index.scss";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./Common/styles/Common.scss";
+import "./Common/styles/Input.scss";
 import "./Common/styles/List.scss";
+import "./Common/styles/Modal.scss";
+import "./Common/styles/Select.scss";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

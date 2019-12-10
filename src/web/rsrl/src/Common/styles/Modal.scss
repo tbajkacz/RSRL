@@ -1,0 +1,19 @@
+@import "./Variables.scss";
+
+.modal-body,
+.modal-header,
+.modal-footer {
+  background-color: $uiElementBasicBgColor;
+  color: white;
+  border: 0 none !important;
+}
+.modal-content {
+  background-color: $uiElementBasicBgColor;
+  border-radius: 0.5rem !important;
+}
+.modal-header {
+  padding-bottom: 0px;
+}
+.modal-body {
+  padding-top: 8px;
+}

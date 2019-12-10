@@ -1,0 +1,13 @@
+@import "./Variables.scss";
+@import "../../../node_modules/bootstrap";
+
+.ui-select-dark {
+  @extend .form-control;
+  background-color: $uiElementInputColor;
+  border-radius: $uiElementBorderRadius;
+  border: 0;
+  &:focus {
+    background-color: $uiElementInputColor;
+    box-shadow: none !important;
+  }
+}
