@@ -34,7 +34,7 @@ export default function AccessCardList(props: AccessCardListProps) {
   }, [dataChanged]);
 
   const updateUserInfos = async () => {
-    let promise = userService.Get();
+    let promise = userService.GetInfos();
     setModalPromise(promise);
     promise.then(response => {
       setUserInfos(
