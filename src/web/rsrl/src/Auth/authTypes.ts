@@ -6,6 +6,7 @@ export interface CurrentUser {
 export interface AuthParams {
   login: string;
   password: string;
+  rememberMe: boolean;
 }
 
 export interface Auth {

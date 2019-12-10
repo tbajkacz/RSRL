@@ -4,29 +4,16 @@
 .ui-login-card {
   @extend .col-sm-12;
   @extend .card;
-  max-width: 400px;
+  max-width: 350px;
   padding-left: 0px;
   padding-right: 0px;
+  border-radius: $uiElementBorderRadius;
   background-color: $uiElementBasicBgColor;
-
-  input {
-    background-color: $uiElementBorderColor;
-    border: 0;
-    &:focus {
-      background-color: $uiElementBorderColor;
-      color: white;
-    }
-  }
 }
-
-.ui-input-icon {
-  @extend .input-group-text;
-  width: 40px;
-  background-color: $primaryColor;
-  color: black;
-  border: 0 !important;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
+.ui-login-card-body {
+  @extend .card-body;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .ui-login-remember-me {

@@ -7,18 +7,34 @@ import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthParams } from "./authTypes";
 import { Card, CardHeader, CardBody, Form, InputGroup, CardFooter, FormGroup, Label, Input, Button } from "reactstrap";
+import { FormInput, FormInputConfig } from "../Common/FormInput";
+import useForm from "react-hook-form";
 
 interface LoginProps {
   className?: string;
 }
 
 export function Login(props: LoginProps) {
-  const [params, setParams] = useState<AuthParams>();
-  const auth = useAuth();
+  const [params, setParams] = useState<AuthParams>({
+    login: "",
+    password: "",
+    rememberMe: false
+  });
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const auth = useAuth();
+  const { register, handleSubmit, errors } = useForm();
+
+  const onSubmit = () => {
     auth.signIn(params);
+  };
+
+  const onChange = (name: string, value: string) => {
+    setParams({ ...params, [name]: value });
+  };
+
+  const config: FormInputConfig = {
+    onChange,
+    errors
   };
 
   return auth.currentUser ? (
@@ -29,43 +45,39 @@ export function Login(props: LoginProps) {
         <CardHeader>
           <h3 className="text-white">Sign In</h3>
         </CardHeader>
-        <CardBody>
-          <Form onSubmit={onSubmit}>
-            <FormGroup>
-              <InputGroup className="input-group">
-                <span className="ui-input-icon">
-                  <FontAwesomeIcon icon={faUser} />
-                </span>
-                <Input
-                  type="text"
-                  placeholder="username"
-                  onChange={e => setParams({ ...params!, login: e.currentTarget.value })}
-                />
-              </InputGroup>
-            </FormGroup>
-            <FormGroup>
-              <InputGroup>
-                <span className="ui-input-icon">
-                  <FontAwesomeIcon icon={faKey} />
-                </span>
-                <Input
-                  type="password"
-                  placeholder="password"
-                  onChange={e => setParams({ ...params!, password: e.currentTarget.value })}
-                />
-              </InputGroup>
-            </FormGroup>
+        <div className="ui-login-card-body">
+          <Form>
+            <FormInput
+              className="flex-fill"
+              config={config}
+              type="text"
+              name="login"
+              icon={faUser}
+              inputRef={register({
+                required: true
+              })}
+            />
+            <FormInput
+              className="flex-fill"
+              config={config}
+              type="password"
+              name="password"
+              icon={faKey}
+              inputRef={register({
+                required: true
+              })}
+            />
             <FormGroup className="ui-login-remember-me">
-              <Input type="checkbox" />
+              <Input type="checkbox" onChange={e => setParams({ ...params!, rememberMe: e.currentTarget.checked })} />
               <Label>Remember me</Label>
             </FormGroup>
             <FormGroup>
-              <Button color="primary" block={true}>
+              <Button color="primary" block={true} type="submit" onClick={handleSubmit(onSubmit)}>
                 Login
               </Button>
             </FormGroup>
           </Form>
-        </CardBody>
+        </div>
         <CardFooter>
           <small className="text-white">
             Don't have an account? <a href="mailto:tomasz.bajkacz@gmail.com">Contact</a> your administrator
