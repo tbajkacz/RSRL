@@ -96,6 +96,7 @@ namespace RSRL.Api.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<VerifyAccessCardAllowedDto> VerifyAccessCardAllowed([FromQuery]VerifyAccessCardAllowedParams param)
         {
             return new VerifyAccessCardAllowedDto
