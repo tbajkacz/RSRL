@@ -11,6 +11,8 @@ namespace RSRL.Api.Locks.Dto
 
         public string Url { get; set; }
 
+        public string SecretKey { get; set; }
+
         public IList<AccessCardDto> AllowedAccessCards { get; set; }
     }
 }

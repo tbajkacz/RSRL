@@ -22,6 +22,7 @@ export default function RemoteLockModal(props: RemoteLockModalProps) {
     id: 0,
     url: "",
     name: "",
+    secretKey: "",
     allowedAccessCardIds: []
   };
   const [modalData, setModalData] = useState<RemoteLockModalData>(modalDataDefaultValue);
@@ -37,7 +38,8 @@ export default function RemoteLockModal(props: RemoteLockModalProps) {
             id: props.currentData.id,
             url: props.currentData.url,
             name: props.currentData.name,
-            allowedAccessCardIds: props.currentData.allowedAccessCards.map(c => c.id)
+            allowedAccessCardIds: props.currentData.allowedAccessCards.map(c => c.id),
+            secretKey: props.currentData.secretKey
           });
         }
         break;
@@ -57,6 +59,8 @@ export default function RemoteLockModal(props: RemoteLockModalProps) {
     switch (name) {
       case "id":
         return props.operation === RemoteLockOperation.Edit;
+      case "secretKey":
+        return true;
     }
     return false;
   };
@@ -64,6 +68,8 @@ export default function RemoteLockModal(props: RemoteLockModalProps) {
   const isInputHidden = (name: string) => {
     switch (name) {
       case "id":
+        return props.operation === RemoteLockOperation.Add;
+      case "secretKey":
         return props.operation === RemoteLockOperation.Add;
     }
     return false;
@@ -144,6 +150,7 @@ export default function RemoteLockModal(props: RemoteLockModalProps) {
               required: true
             })}
           />
+          <FormInput config={inputConfig} name="secretKey" defaultValue={modalData.secretKey} inputRef={register({})} />
           <FormGroup hidden={isInputHidden("allowedAccessCardIds")}>
             <small className="ui-input-label">Access cards</small>
             <Select

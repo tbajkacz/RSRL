@@ -4,6 +4,7 @@ export interface RemoteLock {
   id: number;
   name: string;
   url: string;
+  secretKey: string;
   allowedAccessCards: AccessCard[];
 }
 
@@ -37,6 +38,7 @@ export interface RemoteLockModalData {
   id: number;
   name: string;
   url: string;
+  secretKey: string;
   allowedAccessCardIds: string[];
 }
 
