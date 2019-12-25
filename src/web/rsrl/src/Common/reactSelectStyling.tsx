@@ -1,5 +1,5 @@
 import { Styles } from "react-select";
-import * as styles from "../Common/styles/Variables.scss";
+import styles from "../Common/styles/Variables.scss";
 import { styleFn } from "react-select/src/styles";
 
 const bgColor = styles["uiElementBasicBgColor"];
