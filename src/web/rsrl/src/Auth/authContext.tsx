@@ -19,9 +19,9 @@ interface ProvideAuthProps {
 
 export function ProvideAuth(props: ProvideAuthProps) {
   const { Provider } = AuthContext;
-  const { promise, ...auth } = useProvideAuth();
+  const { ...auth } = useProvideAuth();
   return (
-    <LoadingIndicator promise={promise}>
+    <LoadingIndicator promise={auth.promise}>
       <Provider value={auth}>{props.children}</Provider>
     </LoadingIndicator>
   );
