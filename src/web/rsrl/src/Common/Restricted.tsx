@@ -26,9 +26,10 @@ export default function Restricted(props: RestrictedProps) {
     }
   }, [auth.promise]);
 
-  const hasAnyOfRoles = () => {
-    return auth.currentUser && auth.currentUser.roles.some(r => props.roles.includes(r) || r === roles.admin);
-  };
+  const hasAnyOfRoles = () =>
+    auth.currentUser && auth.currentUser.roles.some(r => props.roles.includes(r) || r === roles.admin);
 
-  return hasAnyOfRoles() ? props.children : props.redirectToLogin && complete ? redirect : null;
+  const redirectOrNull = () => (props.redirectToLogin && complete ? redirect : null);
+
+  return hasAnyOfRoles() ? props.children : redirectOrNull();
 }
