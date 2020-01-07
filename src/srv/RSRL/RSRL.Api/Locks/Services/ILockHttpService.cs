@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using RSRL.Api.Locks.Dto;
+using System.Threading.Tasks;
 
 namespace RSRL.Api.Locks.Services
 {
@@ -7,5 +8,7 @@ namespace RSRL.Api.Locks.Services
         Task ToggleBlockAsync(int lockId, bool targetState);
 
         Task UnlockAsync(int lockId);
+
+        Task<IsBlockedDto> IsBlockedAsync(int lockId);
     }
 }

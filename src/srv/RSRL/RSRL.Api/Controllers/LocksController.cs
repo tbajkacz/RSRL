@@ -96,6 +96,12 @@ namespace RSRL.Api.Controllers
         }
 
         [HttpGet]
+        public async Task<IsBlockedDto> IsBlocked([FromQuery]IsBlockedParams param)
+        {
+            return await lockHttpService.IsBlockedAsync(param.Id);
+        }
+
+        [HttpGet]
         [AllowAnonymous]
         public async Task<VerifyAccessCardAllowedDto> VerifyAccessCardAllowed([FromQuery]VerifyAccessCardAllowedParams param)
         {

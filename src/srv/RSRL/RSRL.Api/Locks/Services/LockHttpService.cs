@@ -49,5 +49,16 @@ namespace RSRL.Api.Locks.Services
                 httpClient.Dispose();
             }
         }
+
+        public async Task<IsBlockedDto> IsBlockedAsync(int lockId)
+        {
+            var remoteLock = await lockRepository.GetByIdAsync(lockId);
+
+            var url = Path.Combine(remoteLock.Url, "isBlocked").Replace(@"\", @"/");
+
+            var response = await httpClient.GetAsync(url);
+
+            return await response.Content.ReadAsAsync<IsBlockedDto>();
+        }
     }
 }
