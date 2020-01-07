@@ -49,6 +49,14 @@ export interface AccessCardSelectModel {
   ownerSurname: string;
 }
 
+export interface RemoteLockIsBlockedParams {
+  id: number;
+}
+
+export interface RemoteLockIsBlocked {
+  isBlocked: boolean;
+}
+
 export enum RemoteLockOperation {
   None,
   Add,

@@ -6,7 +6,9 @@ import {
   RemoteLockUpdateParams,
   RemoteLockDeleteParams,
   RemoteLockToggleBlockParams,
-  RemoteLockUnlockParams
+  RemoteLockUnlockParams,
+  RemoteLockIsBlockedParams,
+  RemoteLockIsBlocked
 } from "./remoteLockTypes";
 import { unwrap } from "../Common/serviceUtility";
 class RemoteLockService {
@@ -32,6 +34,10 @@ class RemoteLockService {
 
   Unlock(param: RemoteLockUnlockParams) {
     return axios.post<ApiResponse<any>>("api/Locks/Unlock", param).then(unwrap);
+  }
+
+  IsBlocked(param: RemoteLockIsBlockedParams) {
+    return axios.get<ApiResponse<RemoteLockIsBlocked>>(`api/Locks/IsBlocked?id=${param.id}`).then(unwrap);
   }
 }
 
