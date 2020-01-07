@@ -8,6 +8,7 @@ import "./Common/styles/Input.scss";
 import "./Common/styles/List.scss";
 import "./Common/styles/Modal.scss";
 import "./Common/styles/Select.scss";
+import "./Common/styles/Card.scss";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

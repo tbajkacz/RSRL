@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/App.scss";
 import { Login } from "./Auth/Login";
-import { Route, Link, Switch, Router, HashRouter } from "react-router-dom";
+import { Route, Link, Switch, Router, HashRouter, Redirect } from "react-router-dom";
 import UserMenu from "./Auth/UserMenu";
 import { ProvideAuth } from "./Auth/authContext";
 import routes from "./Common/Routes";
@@ -83,6 +83,9 @@ function App() {
               <Restricted roles={[roles.logManager]} redirectToLogin>
                 <ActionLogList />
               </Restricted>
+            </Route>
+            <Route>
+              <Redirect to={routes.Home} />
             </Route>
           </Switch>
         </div>

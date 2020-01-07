@@ -1,0 +1,8 @@
+@import "./Variables.scss";
+@import "../../../node_modules/bootstrap";
+
+.ui-card-dark {
+  @extend .card;
+  background-color: $uiElementBasicBgColor;
+  color: white;
+}
