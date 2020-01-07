@@ -11,9 +11,9 @@
     color: white;
     box-shadow: none !important;
   }
-  &:disabled {
-    background-color: #151515;
-    color: #252525;
+  &:read-only {
+    background-color: $uiElementInputColor !important;
+    color: white;
   }
 }
 

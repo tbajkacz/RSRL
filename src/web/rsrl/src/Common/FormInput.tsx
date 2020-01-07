@@ -60,7 +60,7 @@ export function FormInput(props: FormInputProps) {
             setValue(e.currentTarget.value);
             props.config.onChange(props.name, e.currentTarget.value);
           }}
-          disabled={isDisabled()}
+          readOnly={isDisabled()}
           hidden={isHidden()}
           defaultValue={props.defaultValue}
           ref={isHidden() || isDisabled() ? undefined : props.inputRef}
