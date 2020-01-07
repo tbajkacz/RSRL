@@ -2,7 +2,7 @@ import { UserAccount } from "../Users/userTypes";
 
 export interface AccessCard {
   id: string;
-  owner: UserAccount;
+  owner?: UserAccount;
 }
 
 export interface AccessCardAddParams {
