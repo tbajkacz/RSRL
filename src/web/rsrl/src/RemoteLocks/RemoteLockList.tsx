@@ -38,9 +38,9 @@ export default function RemoteLockList(props: RemoteLockListProps) {
     promise.then(response => {
       let mapped = response.result.map(c => ({
         id: c.id,
-        ownerLogin: c.owner.login,
-        ownerName: c.owner.name,
-        ownerSurname: c.owner.surname
+        ownerLogin: c.owner ? c.owner.login : "-",
+        ownerName: c.owner ? c.owner.name : "unowned",
+        ownerSurname: c.owner ? c.owner.surname : ""
       }));
       setAccessCardsInfos(mapped);
     });
