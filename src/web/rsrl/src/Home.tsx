@@ -9,7 +9,6 @@ export default function Home() {
   let auth = useAuth();
   let userName = auth.currentUser ? auth.currentUser.name + " " + auth.currentUser.surname : "Guest";
   let userRoles = auth.currentUser ? auth.currentUser.roles.join(", ") : "guest";
-  console.log(userRoles);
   return (
     <div className="col-sm-8 offset-sm-2">
       <div className="card-columns">
