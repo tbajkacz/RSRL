@@ -27,7 +27,11 @@ export default function Restricted(props: RestrictedProps) {
   }, [auth.promise]);
 
   const hasAnyOfRoles = () =>
-    auth.currentUser && auth.currentUser.roles.some(r => props.roles.includes(r) || r === roles.admin);
+    auth.currentUser
+      ? auth.currentUser.roles.some(
+          r => props.roles.includes(r) || (r === roles.admin && !props.roles.includes(roles.guest))
+        )
+      : props.roles.includes(roles.guest);
 
   const redirectOrNull = () => (props.redirectToLogin && complete ? redirect : null);
 

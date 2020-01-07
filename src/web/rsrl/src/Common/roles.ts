@@ -1,6 +1,7 @@
 const roles = {
   admin: "admin",
   lockManager: "lockManager",
-  logManager: "logManager"
+  logManager: "logManager",
+  guest: "guest"
 };
 export default roles;
