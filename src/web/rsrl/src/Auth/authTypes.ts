@@ -1,5 +1,7 @@
 export interface CurrentUser {
   login: string;
+  name: string;
+  surname: string;
   roles: string[];
 }
 
