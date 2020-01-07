@@ -4,11 +4,12 @@ import Restricted from "./Common/Restricted";
 import roles from "./Common/roles";
 import routes from "./Common/Routes";
 import { Link } from "react-router-dom";
+import { getRoleDisplayString } from "./Common/ComponentUtility";
 
 export default function Home() {
   let auth = useAuth();
   let userName = auth.currentUser ? auth.currentUser.name + " " + auth.currentUser.surname : "Guest";
-  let userRoles = auth.currentUser ? auth.currentUser.roles.join(", ") : "guest";
+  let userRoles = auth.currentUser ? auth.currentUser.roles.map(r => getRoleDisplayString(r)).join(", ") : "guest";
   return (
     <div className="col-sm-8 offset-sm-2">
       <div className="card-columns">
