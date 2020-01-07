@@ -21,6 +21,30 @@ export default function Home() {
           </div>
         </div>
 
+        <Restricted roles={[roles.guest]}>
+          <div className="ui-card-dark">
+            <div className="card-body">
+              <h5 className="card-title">Sign in</h5>
+              <p className="card-text">Already have an account?</p>
+              <Link to={routes.UserAccounts} className="btn btn-primary">
+                Sign in
+              </Link>
+            </div>
+          </div>
+        </Restricted>
+
+        <Restricted roles={[roles.guest]}>
+          <div className="ui-card-dark">
+            <div className="card-body">
+              <h5 className="card-title">Register</h5>
+              <p className="card-text">Need an account? Contact your administrator.</p>
+              <a href={"mailto:tomasz.bajkacz@gmail.com"} className="btn btn-primary">
+                Contact
+              </a>
+            </div>
+          </div>
+        </Restricted>
+
         <Restricted roles={[roles.admin]}>
           <div className="ui-card-dark">
             <div className="card-body">
