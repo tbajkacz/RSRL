@@ -1,12 +1,15 @@
 ﻿using NHibernate;
+using NHibernate.Criterion;
 using RSRL.Api.Db.Models;
 using RSRL.Api.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace RSRL.Api.Db.Services
 {
-    public class NHibernateRepositoryBase<TEntity, TId> : IRepository<TEntity, TId> where TEntity : Entity<TId>
+    public class NHibernateRepositoryBase<TEntity, TId> : IRepository<TEntity, TId> 
+        where TEntity : Entity<TId>
     {
         protected readonly ISession session;
 
@@ -52,7 +55,19 @@ namespace RSRL.Api.Db.Services
 
         public virtual async Task UpdateAsync(TEntity entity)
         {
+            if (!EntityExists(entity.Id))
+            {
+                throw new EntityNotFoundException(typeof(TEntity), entity.Id);
+            }
             await session.MergeAsync(entity);
+        }
+
+        protected virtual bool EntityExists(TId id)
+        {
+            return session.CreateCriteria<TEntity>()
+                .Add(Restrictions.Eq("id", id))
+                .SetProjection(Projections.Count("id"))
+                .UniqueResult<int>() > 0;
         }
     }
 }
