@@ -29,7 +29,7 @@ namespace RSRL.Api.Locks.Models
             Map(x => x.SecretKey)
                 .Not.Nullable()
                 .Unique();
-            HasMany(x => x.AllowedAccessCards);
+            HasManyToMany(x => x.AllowedAccessCards);
         }
     }
 }
