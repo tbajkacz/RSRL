@@ -22,6 +22,4 @@ xcopy /e /v %WEBBUILD% %WWWROOT%
 
 cd srv\%SRVNAME%\%SRVPROJ%\
 
-call dotnet build -c Release
-
 cd ..\..\..
