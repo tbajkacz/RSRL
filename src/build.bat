@@ -14,6 +14,10 @@ IF EXIST %WWWROOT% (
     del %WWWROOT%\*.* /F /Q
 )
 
+IF NOT EXIST %WWWROOT% (
+	MKDIR %WWWROOT%
+)
+
 xcopy /e /v %WEBBUILD% %WWWROOT%
 
 cd srv\%SRVNAME%\%SRVPROJ%\
