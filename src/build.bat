@@ -20,6 +20,4 @@ IF NOT EXIST %WWWROOT% (
 
 xcopy /e /v %WEBBUILD% %WWWROOT%
 
-cd srv\%SRVNAME%\%SRVPROJ%\
-
 cd ..\..\..
