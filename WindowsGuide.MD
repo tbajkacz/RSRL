@@ -14,4 +14,5 @@
 ## 3. Running the project
 + enter the *RSRL-master/src* directory
 + launch *run.bat*
++ if windows defender popup shows, choose the allow access option
 + paste the url, which will appear in the console, into your browser to access the application
